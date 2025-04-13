@@ -183,14 +183,14 @@ function Dashboard() {
                 <h3 className="text-lg font-semibold text-gray-100">
                   Staking Wallet
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">40000.00</p>
+                <p className="text-2xl font-bold text-gray-100">{auth.user.staking_wallet || 40000.00} </p>
               </div>
 
               <div className="bg-gradient-to-br from-sky-400 to-sky-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   Token Wallet
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">40000.00</p>
+                <p className="text-2xl font-bold text-gray-100">{auth.user.token_wallet || 40000.00}</p>
               </div>
             </section>
             {/* Team Section Ends*/}
