@@ -34,7 +34,7 @@ function Home() {
         <div className="absolute top-0 left-0 w-full h-full bg-[#00000080] z-0"></div>
         <div className="absolute top-0 left-0 w-full h-full z-10 flex flex-col items-center justify-center text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 text-orange-600">
-            AI Powered Forex Trading
+            AI Powered Trading
           </h1>
           <p className="text-lg md:text-xl mb-8 max-w-3xl">
             At International Holding, we are revolutionizing the Forex trading
@@ -194,7 +194,7 @@ function Home() {
               </h2>
             </div>
             <p className="text-lg text-gray-300 font-medium mb-4">
-              Principal Grow is all about modern digital technologies, Web3, and
+              AI Digital Asset Management is all about modern digital technologies, Web3, and
               the latest applications, cultivating value exchange trends on a
               global scale.
             </p>
@@ -221,7 +221,7 @@ function Home() {
             </h3>
             <p className="text-gray-300">
               Founded in 2018 by a team of experienced traders, developers, and
-              AI experts, Principal Grow emerged from a passion for innovation
+              AI experts, AI Digital Asset Management emerged from a passion for innovation
               and a commitment to excellence. We strive to leverage AI to make
               Forex trading more accessible, efficient, and profitable.
             </p>
@@ -229,7 +229,7 @@ function Home() {
               AI-Powered Governance
             </h3>
             <p className="text-gray-300">
-              AI-powered Aiden Insight is guiding Principal Grow towards
+              AI-powered Aiden Insight is guiding AI Digital Asset Management towards
               strategic growth and governance. Following the Q3 2024 board
               meeting, Aiden’s insights are shaping the company’s future with
               refined strategies and operational excellence.
@@ -463,7 +463,7 @@ function Home() {
                   {index === 0 &&
                     "It is our Vision to bring some order and respectability to this industry by sharing our experiences and knowledge to make a success of Forex Trading."}
                   {index === 1 &&
-                    "Principal Grow is committed to core values - Integrity, Customer Focused Culture, Trust, Respect and Care for the Individual, Passion for Excellence, Teamwork."}
+                    "AI Digital Asset Management is committed to core values - Integrity, Customer Focused Culture, Trust, Respect and Care for the Individual, Passion for Excellence, Teamwork."}
                   {index === 2 &&
                     "To provide innovative and responsive services for older people, which support Customer Focused Culture and help them have the best quality of life."}
                 </p>
@@ -476,7 +476,7 @@ function Home() {
 
       <footer className="tp-footer-area p-8 text-gray-400 text-center bg-gray-900 mt-1">
         <div className="container mx-auto px-6">
-          <p>© Principal Grow 2024-25 | All Rights Reserved</p>
+          <p>© AI Digital Asset Management 2024-25 | All Rights Reserved</p>
           <div className="mt-4">
             <a href="#" className="mr-4 hover:text-white">
               About us
