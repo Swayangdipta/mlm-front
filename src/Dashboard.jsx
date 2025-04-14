@@ -263,14 +263,14 @@ function Dashboard() {
                 <h3 className="text-lg font-semibold text-gray-100">
                   My Direct Team
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">{userData.referrals.length}</p>
+                <p className="text-2xl font-bold text-gray-100">{userData && userData.referrals.length}</p>
               </div>
 
               <div className="bg-gradient-to-br from-amber-600 to-amber-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   My Linked Team
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">{(lengths.total - userData.referrals.length) > 0 ? lengths.total - userData.referrals.length : (lengths.total - userData.referrals.length) * -1}</p>
+                <p className="text-2xl font-bold text-gray-100">{userData && (lengths.total - userData.referrals.length) > 0 ? userData && lengths.total - userData.referrals.length : userData && (lengths.total - userData.referrals.length) * -1}</p>
               </div>
             </section>
 
