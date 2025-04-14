@@ -19,6 +19,7 @@ import ViewWithdrawlsPage from "./ViewWithdrawlsPage";
 import ViewDepositsPage from "./ViewDepositsPage";
 import CreditsPage from "./CreditsPage";
 import TransferPage from "./TransferPage";
+import NewJoining from "./NewJoining";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/withdrawals" element={<CreditsPage from="withdrawals" />}/>
         <Route path="/transfer" element={<TransferPage />}/>
         <Route path="/Dashboard" element={<Dashboard />}/>
+        <Route path="/new-joining/:sponsorId" element={<Register from="dashboard" />}/>
         <Route path="/deposit" element={<DepositPage />}/>
         <Route path="/fundwallet" element={<CapitalPage />}/>
         <Route path="/tokenwallet" element={<Invest />}/> 

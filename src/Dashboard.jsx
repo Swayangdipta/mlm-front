@@ -108,7 +108,7 @@ function Dashboard() {
       </div>
 
       {/* Main Content */}
-      <main className="pt-36 bg-fixed bg-center bg-[url(https://img.freepik.com/free-photo/representation-user-experience-interface-design_23-2150165975.jpg?t=st=1744525715~exp=1744529315~hmac=1b526465bdf9b802863c3a9d80a2e3983a54eea80681749818353c5ff517ed2e&w=1380)]">
+      <main className="pt-36 bg-fixed bg-center bg-[url(https://cdn.pixabay.com/photo/2021/10/01/12/44/abstract-6672383_1280.jpg)]">
         {/* Referral Link section starts */}
         <div className="p-4 rounded-lg w-full md:w-[calc(100%-2rem)] mx-auto">
 

@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { removeAuthFromSessionStorage } from './utils/ls.util';
+import { getAuthFromSessionStorage, removeAuthFromSessionStorage } from './utils/ls.util';
 
 const Menu = ({setIsmenuOpen = f => f}) => {
     const navigate = useNavigate();
+    const auth = getAuthFromSessionStorage()
 
       const handleLogout = () => {
         // logout
@@ -21,6 +22,9 @@ const Menu = ({setIsmenuOpen = f => f}) => {
         <div className="p-2 w-full text-left mt-14">
             <Link to="/dashboard">
                 <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Home</button>
+            </Link>
+            <Link to={`/new-joining/${auth.user.code}`}>
+                <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Add Joining</button>
             </Link>
             <Link to="/fundwallet">
             <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Fund Wallet</button>
