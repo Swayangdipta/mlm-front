@@ -14,10 +14,19 @@ import WithdrawalPopup from "./WithdrawalPopup";
 import { MdMenu } from "react-icons/md";
 import Menu from "./Menu";
 import bg from './asset/background.jpg'
+import { getUserData, getUserDownline } from "./helper/baseApiCalls";
+import { toast } from "react-toastify";
 function Dashboard() {
   const [currentUser, setCuerrentUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   const [isMenuOpen, setIsmenuOpen] = useState(false);
+  const [lengths, setLengths] = useState({
+    direct: 0,
+    linked: 0,
+    total: 0,
+    referral_wallet: 0
+  });
   const auth = getAuthFromSessionStorage();
   const navigate = useNavigate();
 
@@ -39,10 +48,53 @@ function Dashboard() {
     if (auth) {
       setCuerrentUser(auth.user);
     } else {
-      // redirect
       navigate("/login");
     }
   }, [ navigate]);
+
+  useEffect(()=>{
+    const fetchUser = async () => {
+      const res = await getUserData(auth.user.id)
+      
+      if(res.status !== 200){
+        toast.error(res.message || res.data.message)
+        return
+      } 
+
+      setUserData(res.data)
+    }
+
+    const fetchDownline = async () =>{
+      const res = await getUserDownline(auth.user.id)
+      
+      if(res.status !== 200){
+        toast.error(res.message || res.data.message)
+        return
+      } 
+
+      const data = res.data
+
+      setLengths({total: data.length})
+    }
+
+    if(auth && auth.user){
+      fetchUser()
+      fetchDownline()
+    }
+  },[])
+
+  useEffect(()=>{
+    if(userData){
+
+      if(userData.referrals){
+        setLengths({...lengths, direct: userData.referrals.length})
+      }   
+      
+      if(userData.referral_wallet){
+        setLengths({...lengths, referral_wallet: userData.referral_wallet})
+      }
+    }
+  },[userData])
   return (
     <div className="min-h-screen bg-blue-50 flex flex-col">
       {/* Navbar1 */}
@@ -60,10 +112,10 @@ function Dashboard() {
           {/* Flag and logout button */}
           <div className="flex items-center sm:space-x-10 space-x-4 sm:h-full ml-auto mt-0 sm:flex-row flex-row">
             {/* <img src={flag} alt="USA Flag" className="w-[2.6rem] h-[1.4rem]" /> */}
-              <button className="text-2xl" onClick={handleLogout}>
+              <button className="text-2xl text-rose-300" onClick={handleLogout}>
                 <IoMdLogOut />
               </button>                                       
-              <button className="text-2xl" onClick={() => setIsmenuOpen(!isMenuOpen)}>
+              <button className="text-2xl text-white" onClick={() => setIsmenuOpen(!isMenuOpen)}>
                 <MdMenu />
               </button>                                       
             </div>
@@ -81,7 +133,7 @@ function Dashboard() {
             <Link to="/fundwallet">
               <button className="font-semibold hidden sm:block">Fund Wallet</button>
             </Link>
-            <button className="font-semibold  hidden sm:block">AI</button>
+            {/* <button className="font-semibold  hidden sm:block">AI</button> */}
             <Link to="/tokenwallet">
               <button className="font-semibold  hidden sm:block">Token Wallet</button>
             </Link>
@@ -175,7 +227,7 @@ function Dashboard() {
                   Fund Wallet
                 </h3>
                 <p className="text-2xl font-bold text-white">
-                  ${ 100 || auth.user.wallet_balance}
+                  ${auth.user.wallet_balance || 0}
                 </p>
               </div>
 
@@ -183,14 +235,14 @@ function Dashboard() {
                 <h3 className="text-lg font-semibold text-gray-100">
                   Staking Wallet
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">{auth.user.staking_wallet || 40000.00} </p>
+                <p className="text-2xl font-bold text-gray-100">{auth.user.staking_wallet} </p>
               </div>
 
               <div className="bg-gradient-to-br from-sky-400 to-sky-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   Token Wallet
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">{auth.user.token_wallet || 40000.00}</p>
+                <p className="text-2xl font-bold text-gray-100">{auth.user.token_wallet}</p>
               </div>
             </section>
             {/* Team Section Ends*/}
@@ -204,21 +256,21 @@ function Dashboard() {
                 <h3 className="text-lg font-semibold text-gray-100">
                   My Total Team
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">131</p>
+                <p className="text-2xl font-bold text-gray-100">{lengths.total}</p>
               </div>
 
               <div className="bg-gradient-to-br from-amber-400 to-amber-400 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   My Direct Team
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">5</p>
+                <p className="text-2xl font-bold text-gray-100">{userData.referrals.length}</p>
               </div>
 
               <div className="bg-gradient-to-br from-amber-600 to-amber-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   My Linked Team
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">126</p>
+                <p className="text-2xl font-bold text-gray-100">{(lengths.total - userData.referrals.length) > 0 ? lengths.total - userData.referrals.length : (lengths.total - userData.referrals.length) * -1}</p>
               </div>
             </section>
 
@@ -231,21 +283,21 @@ function Dashboard() {
                 <h3 className="text-lg font-semibold text-gray-100">
                   Referral Benefit
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">2000.00</p>
+                <p className="text-2xl font-bold text-gray-100">{userData && userData.referral_wallet}</p>
               </div>
 
-              <div className="bg-gradient-to-tl from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
+              {/* <div className="bg-gradient-to-tl from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   Team Benefit
                 </h3>
                 <p className="text-2xl font-bold text-gray-100">00.00</p>
-              </div>
+              </div> */}
 
               <div className="bg-gradient-to-br from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   Daily Reward
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">00.00</p>
+                <p className="text-2xl font-bold text-gray-100">{userData && userData.daily_rewards}</p>
               </div>
             </section>
             {/* Bonus Section Ends */}
@@ -263,7 +315,11 @@ function Dashboard() {
                 <h3 className="text-lg font-semibold text-gray-100">
                   Total Bonus
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">00.00</p>
+                <p className="text-2xl font-bold text-gray-100">
+                  {
+                    parseFloat(userData?.daily_rewards) + parseFloat(userData?.monthly_rewards) + parseFloat(userData?.lifetime_rewards) + parseFloat(userData?.referral_wallet)
+                  }
+                </p>
               </div>
 
             </section>

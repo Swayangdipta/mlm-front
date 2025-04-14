@@ -23,13 +23,16 @@ const Menu = ({setIsmenuOpen = f => f}) => {
             <Link to="/dashboard">
                 <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Home</button>
             </Link>
+            <Link to="/profile">
+                <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Profile</button>
+            </Link>
             <Link to={`/new-joining/${auth.user.code}`}>
                 <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Add Joining</button>
             </Link>
             <Link to="/fundwallet">
             <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Fund Wallet</button>
             </Link>
-            <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">AI</button>
+            {/* <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">AI</button> */}
             <Link to="/tokenwallet">
             <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2">Token Wallet</button>
             </Link>

@@ -21,6 +21,8 @@ const DownlineView = () => {
 
   useEffect(() => {
     getUserDownline(userId).then((response) => {
+      console.log(response);
+      
       if (response.status === 200) {
         setDownline(response.data);
       }
@@ -52,9 +54,7 @@ const DownlineView = () => {
             <Link to="/dashboard">
               <button className="font-semibold">Home</button>
             </Link>
-            <button className="font-semibold">Capital</button>
-            <button className="font-semibold">AI</button>
-            <button className="font-semibold">Market</button>
+
             <Link to="/profile">
               <button className="font-semibold relative top-0 group">
                 Profile

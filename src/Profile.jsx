@@ -52,13 +52,7 @@ const Profile = () => {
             <Link to="/dashboard">
               <button className="font-semibold">Home</button>
             </Link>
-            <Link to="/capital">
-              <button className="font-semibold">Capital</button>
-            </Link>
-            <button className="font-semibold">AI</button>
-            <Link to="/invest">
-              <button className="font-semibold">Invest</button>
-            </Link>
+
             <Link to="/profile">
               <button className="font-semibold relative top-0 group">
                 Profile

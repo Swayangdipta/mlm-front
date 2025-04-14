@@ -31,9 +31,7 @@ const BankData = () => {
             <Link to="/dashboard">
               <button className="font-semibold">Home</button>
             </Link>
-            <button className="font-semibold">Capital</button>
-            <button className="font-semibold">Bot</button>
-            <button className="font-semibold">Market</button>
+
             <Link to="/profile">
               <button className="font-semibold relative top-0 group">
                 Profile

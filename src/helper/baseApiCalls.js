@@ -61,6 +61,13 @@ export const getUserDownline = async (data) => {
         return error
     }
 }
+export const getUserData = async (data) => {
+    try {
+        return axios.get(`${backend}/users/${data}`).then(response => response)
+    } catch (error) {
+        return error
+    }
+}
 
 export const getTotalBusiness = async () => {
     try {
