@@ -68,7 +68,7 @@ const Menu = ({setIsmenuOpen = f => f}) => {
             </button>
 
             <Link to="/transfer">
-                <button className="font-semibold w-full min-h-[35px] h-max rounded bg-amber-300 mt-2 text-left px-2 flex items-center gap-2"><FcMoneyTransfer /> Token Transfer</button>
+                <button className="font-semibold w-full min-h-[35px] h-max rounded bg-amber-300 mt-2 text-left px-2 flex items-center gap-2"><FcMoneyTransfer />ID to ID E-Wallet Transfer</button>
             </Link>
 
             <button onClick={handleLogout} className="font-semibold w-full text-white min-h-[45px] h-max rounded bg-rose-500 mt-6 text-left px-2 flex items-center gap-2"><IoLogOut /> Logout</button>
