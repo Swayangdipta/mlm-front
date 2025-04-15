@@ -68,7 +68,7 @@ const DepositPage = () => {
   return (
     <div className='w-screen min-h-screen bg-gray-100'>
         <header className='w-full flex justify-between items-center h-16 bg-blue-500 text-white text-2xl p-4 fixed top-0 left-0 z-[1000]'>
-            <Link to='/admin'><h1>Principal Grow</h1></Link>
+            <Link to='/admin'><h1>AIDAM</h1></Link>
 
             <div className='flex items-center gap-8 cursor-pointer '>
                 <Link to='/admin/profile'>

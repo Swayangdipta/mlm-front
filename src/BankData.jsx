@@ -17,7 +17,7 @@ const BankData = () => {
       {/* Navbar1 */}
       <div className="Navbar">
         <header className="bg-blue-500 flex justify-between items-center p-2 pb-3 fixed top-0 w-full z-10">
-          <h1 className="text-[24px] text-white">Principal Grow</h1>
+          <h1 className="text-[24px] text-white">AIDAM</h1>
           <div className="flex space-x-6 mt-1">
             <img src={flag} alt="USA Flag" className="w-[2.6rem] h-[1.4rem]" />
             <button className="ml-10 text-2xl flex-col" onClick={handleLogout}>
