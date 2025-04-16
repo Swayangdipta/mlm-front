@@ -295,3 +295,11 @@ export const approveWithdrawal = async (data) => {
       return { status: error.response?.status || 500, data: [] };
     }
 }
+
+export const getUserFullname = async (data) => {
+    try {
+        return axios.get(`${backend}/users/user/${data}`).then(response => response)
+    } catch (error) {
+        return error
+    }
+}

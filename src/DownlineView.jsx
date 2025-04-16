@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { IoMdLogOut } from "react-icons/io";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import flag from "./assets/usaFlag.png";
-import { getUserDownline } from "./helper/baseApiCalls";
+import { getUserData, getUserDownline } from "./helper/baseApiCalls";
 import { removeAuthFromSessionStorage } from "./utils/ls.util";
+import { toast } from "react-toastify";
 
-const DownlineView = () => {
+const DownlineView = ({type = 'all'}) => {
   const [downline, setDownline] = useState([]);
   const { userId } = useParams();
   const navigate = useNavigate();
@@ -20,13 +21,26 @@ const DownlineView = () => {
   };
 
   useEffect(() => {
-    getUserDownline(userId).then((response) => {
-      console.log(response);
-      
-      if (response.status === 200) {
-        setDownline(response.data);
-      }
-    });
+    if(type === 'all'){
+      getUserDownline(userId).then((response) => {
+        console.log(response);
+        
+        if (response.status === 200) {
+          setDownline(response.data);
+        }
+      });
+    }else{
+      (async () => {
+        const res = await getUserData(userId)
+
+        if(res.status !== 200){
+          return toast.error('Faild to get downline data')
+        }
+
+        setDownline(res.data.referrals)
+      })()
+    }
+
   }, [userId]);
 
   // Calculate pagination

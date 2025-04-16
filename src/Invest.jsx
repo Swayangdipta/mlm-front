@@ -61,7 +61,7 @@ const Invest = () => {
         }
 
         setUserCode(auth.user.code)
-        setCurrentBalance(auth.user.wallet_balance)
+        setCurrentBalance(auth.user.token_wallet)
     }, [auth, navigate])
   return (
     <div className="min-h-screen bg-blue-50">

@@ -71,7 +71,7 @@ const Profile = () => {
           />
           <div>
             <h1 className="text-white text-[24px] text-sm md:text-base">
-              Username: {auth.user.username}
+              Fullname: {auth.user.fullname || auth.user.username}
             </h1>
             <h2 className="text-white text-[16px] text-sm md:text-base">
               Email: {auth.user.email}

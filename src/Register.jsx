@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "./asset/logo.png";
 import { getAuthFromSessionStorage } from "./utils/ls.util";
-import { register } from "./helper/baseApiCalls";
+import { getUserFullname, register } from "./helper/baseApiCalls";
 import { toast } from "react-toastify";
 
 function Register({from = 'home'}) {
@@ -33,6 +33,7 @@ function Register({from = 'home'}) {
     email: "",
     otp: "",
   });
+  const [userFullname, setUserFullname] = useState(undefined)
 
   const {
     sponsor,
@@ -93,6 +94,23 @@ function Register({from = 'home'}) {
       navigate("/dashboard");
     }
   }, [auth, navigate]);
+
+      useEffect(()=>{
+          setUserFullname({fullname: ''})
+  
+          if(sponsor.length > 4){
+              (async () => {
+                  const res = await getUserFullname(sponsor)
+                  console.log(res);
+                  
+                  if(res.status !== 200){
+                      return
+                  }
+  
+                  setUserFullname(res.data)
+              })()
+          }
+      },[sponsor])
 
   return (
     <div className="flex justify-center items-center flex-col min-h-screen overflow-y-auto bg-center bg-cover bg-no-repeat bg-[url(https://png.pngtree.com/background/20210717/original/pngtree-sci-fi-city-light-dot-luminous-building-street-purple-technology-background-picture-image_1446716.jpg)]">
@@ -155,7 +173,7 @@ function Register({from = 'home'}) {
         {/* Form Section */}
         <form onSubmit={handleSubmit}>
           {/* Sponsor Id */}
-          <div className="mb-4">
+          <div className="">
             <input
               type="text"
               id="sponsor-id"
@@ -164,10 +182,9 @@ function Register({from = 'home'}) {
               placeholder="Sponsor ID *"
               value={sponsor}
               onChange={handleChange}
-
-              disabled = {from !== 'home'}
             />
           </div>
+          <p className='w-full h-[20px] p-2 my-2 flex items-center text-white'>{userFullname && userFullname.fullname}</p>
 
           {/* Account Name */}
           <div className="mb-4">

@@ -154,7 +154,7 @@ function Login({ isAdmin }) {
                   "inset 4px 0px 8px rgba(0, 0, 0, 0.6), " + // Darker shadow on the left (pressed effect)
                   "inset -4px 0px 8px rgba(255, 255, 255, 0.2)", // Lighter right shadow (soft glow)
               }}
-              placeholder="Enter Username"
+              placeholder="Enter User Id"
               required
             />
           </div>

@@ -210,7 +210,7 @@ function Dashboard() {
               <h3 className="text-lg font-semibold text-white ml-4">
                 {currentUser?.fullname || currentUser?.username}
               </h3>
-              <p className="text-gray-100 mr-8">India</p>
+              <p className="text-gray-100 mr-8">{currentUser?.country || 'India'}</p>
             </div>
           </div>
           {/* user section ends */}
@@ -218,18 +218,20 @@ function Dashboard() {
           {/* Details Section starts */}
           <div className="flex flex-col gap-4 w-full sm:w-2/3 pr-5 pl-3">
             {/* 1st row of wallet */}
-            <h1 className="text-xl text-yellow-400 font-semibold">
+            <h1 className="text-xl text-yellow-400 font-semibold p-2 rounded bg-slate-800">
               Wallet Details
             </h1>
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-md p-5 rounded-lg text-center">
-                <h3 className="text-lg font-semibold text-gray-100">
-                  Fund Wallet
-                </h3>
-                <p className="text-2xl font-bold text-white">
-                  ${auth.user.wallet_balance || 0}
-                </p>
-              </div>
+              <Link to='/fundwallet'>
+                <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    Fund Wallet
+                  </h3>
+                  <p className="text-2xl font-bold text-white">
+                    ${auth.user.wallet_balance || 0}
+                  </p>
+                </div>             
+              </Link>
 
               <div className="bg-gradient-to-br from-rose-400 to-rose-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
@@ -238,33 +240,40 @@ function Dashboard() {
                 <p className="text-2xl font-bold text-gray-100">{auth.user.staking_wallet} </p>
               </div>
 
-              <div className="bg-gradient-to-br from-sky-400 to-sky-600 shadow-md p-5 rounded-lg text-center">
-                <h3 className="text-lg font-semibold text-gray-100">
-                  Token Wallet
-                </h3>
-                <p className="text-2xl font-bold text-gray-100">{auth.user.token_wallet}</p>
-              </div>
+              <Link to='/tokenwallet'>
+                <div className="bg-gradient-to-br from-sky-400 to-sky-600 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    Token Wallet
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-100">{auth.user.token_wallet}</p>
+                </div>              
+              </Link>
+
             </section>
             {/* Team Section Ends*/}
 
             {/* row1 */}
-            <h1 className="text-xl text-yellow-400 font-semibold">
+            <h1 className="text-xl text-yellow-400 font-semibold p-2 rounded bg-slate-800">
               Team Details
             </h1>
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-              <div className="bg-gradient-to-br from-amber-400 to-amber-600 shadow-md p-5 rounded-lg text-center">
-                <h3 className="text-lg font-semibold text-gray-100">
-                  My Total Team
-                </h3>
-                <p className="text-2xl font-bold text-gray-100">{lengths.total}</p>
-              </div>
+              <Link to={`/downline/${auth.user.id}`}>
+                <div className="bg-gradient-to-br from-amber-400 to-amber-600 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    My Total Team
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-100">{lengths.total}</p>
+                </div>
+              </Link>
 
-              <div className="bg-gradient-to-br from-amber-400 to-amber-400 shadow-md p-5 rounded-lg text-center">
-                <h3 className="text-lg font-semibold text-gray-100">
-                  My Direct Team
-                </h3>
-                <p className="text-2xl font-bold text-gray-100">{userData && userData.referrals.length}</p>
-              </div>
+              <Link to={`/downline/direct/${auth.user.id}`}>
+                <div className="bg-gradient-to-br from-amber-400 to-amber-400 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    My Direct Team
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-100">{userData && userData.referrals.length}</p>
+                </div>              
+              </Link>
 
               <div className="bg-gradient-to-br from-amber-600 to-amber-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
@@ -275,7 +284,7 @@ function Dashboard() {
             </section>
 
             {/* Bonus Section Starts */}
-            <h1 className="text-xl text-yellow-400 font-semibold">
+            <h1 className="text-xl text-yellow-400 font-semibold p-2 rounded bg-slate-800">
               Bonus Details
             </h1>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">

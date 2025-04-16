@@ -90,8 +90,8 @@ const CapitalPage = () => {
 
       <main className="pt-36 w-full min-h-screen bg-[url(https://ehsslibrary2.wordpress.com/wp-content/uploads/2014/04/blank-google-plus-background-navy-blue.jpg)]">
         <div className="w-[300px] h-[150px] mx-auto rounded border-amber-500 border bg-[#00000080] shadow-inner flex  flex-col items-center justify-center gap-30 px-[40px]">
-          <h1 className="text-white text-[20px]">Fund</h1>
-          <h2 className="text-white text-[24px]">${totalInvestment}</h2>
+          <h1 className="text-white text-[20px]">Fund Wallet</h1>
+          <h2 className="text-white text-[24px]">${auth.user.wallet_balance}</h2>
         </div>
       </main>
     </div>

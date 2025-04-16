@@ -39,6 +39,9 @@ const Menu = ({setIsmenuOpen = f => f}) => {
             <Link to={`/new-joining/${auth.user.code}`}>
                 <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2 flex items-center gap-2"><HiUserAdd /> Add Joining</button>
             </Link>
+            <Link to={`/downline/${auth.user.id}`}>
+                <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2 flex items-center gap-2"><HiUserAdd /> My Team</button>
+            </Link>
             <Link to="/fundwallet">
             <button className="font-semibold w-full h-[35px] rounded bg-amber-300 mt-2 text-left px-2 flex items-center gap-2"><FaWallet /> Fund Wallet</button>
             </Link>

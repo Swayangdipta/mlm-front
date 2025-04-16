@@ -48,6 +48,7 @@ function App() {
         <Route path="/profile" element={<Profile />}/>
         <Route path="/profile/bank" element={<BankData />}/>
         <Route path="/downline/:userId" element={<DownlineView />}/>
+        <Route path="/downline/direct/:userId" element={<DownlineView type='direct' />}/>
       </Routes>
       <ToastContainer />
     </Router>
