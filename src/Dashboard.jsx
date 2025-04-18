@@ -172,7 +172,7 @@ function Dashboard() {
               className="border border-gray-300 px-2 py-1 w-full rounded-lg h-14 text-gray-600 pr-12 text-sm md:text-base"
               value={`${
                 import.meta.env.VITE_FRONTEND_URL
-              }/ih/register?sponsorId=${currentUser?.code}`}
+              }/ih/register/${currentUser?.code}`}
               readOnly
             />
             {/* Icon Container */}
@@ -187,7 +187,7 @@ function Dashboard() {
                 className="bg-white text-lg"
                 href={`https://wa.me/?text=Check%20out%20this%20referral%20link:%20${encodeURIComponent(`${
                 import.meta.env.VITE_FRONTEND_URL
-              }/ih/register?sponsorId=${currentUser?.code}`)}`}
+              }/ih/register/${currentUser?.code}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
