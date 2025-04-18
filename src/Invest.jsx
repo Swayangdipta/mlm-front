@@ -7,7 +7,7 @@ import { getAuthFromSessionStorage, removeAuthFromSessionStorage } from './utils
 import { toast } from 'react-toastify';
 import { createInvestment } from './helper/baseApiCalls';
 
-const Invest = () => {
+const Invest = ({type = 'def'}) => {
     const [currentBalance, setCurrentBalance] = React.useState(0)
     const [amount, setAmount] = React.useState('10')
     const [userCode, setUserCode] = React.useState('')
@@ -61,7 +61,11 @@ const Invest = () => {
         }
 
         setUserCode(auth.user.code)
-        setCurrentBalance(auth.user.token_wallet)
+        if(type === 'def'){
+          setCurrentBalance(auth.user.token_wallet)
+        }else if(type === 'Redeem'){
+          setCurrentBalance(auth.user.redeem_wallet ? auth.user.redeem_wallet : 0)
+        }
     }, [auth, navigate])
   return (
     <div className="min-h-screen bg-blue-50">
@@ -100,7 +104,7 @@ const Invest = () => {
 
       <main className="pt-36 w-full min-h-screen bg-[url(https://ehsslibrary2.wordpress.com/wp-content/uploads/2014/04/blank-google-plus-background-navy-blue.jpg)]">
             <div className='w-[300px] min-h-[150px] h-max mx-auto rounded border-amber-500 border bg-[#00000080] shadow-inner flex  flex-col items-left justify-center gap-30 p-[20px]'>
-                <h1 className='text-white text-[24px]'>Tokens ( AIDAM )</h1>
+                <h1 className='text-white text-[20px]'>{type !== 'def' && type} Tokens ( AIDAM )</h1>
                 <h2 className='text-white text-[24px]'>{currentBalance} <span className='text-[18px]'>tokens</span></h2>
             </div>
       </main>

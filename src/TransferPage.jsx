@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import Header from './Header'
-import { getUserFullname } from './helper/baseApiCalls'
+import { getUserFullname, transferAmount } from './helper/baseApiCalls'
 import { toast } from 'react-toastify'
-import { getAuthFromSessionStorage } from './utils/ls.util'
+import { getAuthFromSessionStorage, setAuthInSessionStorage } from './utils/ls.util'
 
 const TransferPage = () => {
     const [isAllowed,setIsAllowed] = React.useState(false)
@@ -47,6 +47,35 @@ const TransferPage = () => {
             })()
         }
     },[userId])
+
+    const handleTransfer = async e => {
+        e.preventDefault()
+        if(amount > auth.user.redeem_wallet || amount <= 0){
+            return toast.error('Invalid Amount!')
+        }
+
+        try {
+            const response = await transferAmount(auth.user.id, userId, amount)
+
+            if(response.status !== 200){
+                return toast.error('Faild to transfer amount')
+            }
+
+            toast.success('Amount transfered successfully!')
+            setAmount(0)
+            setUserId('')
+
+            const userUpdatedData = {...auth.user, redeem_wallet: auth.user.redeem_wallet - amount}
+
+            const newAuth = {...auth, user: userUpdatedData}
+
+            setAuthInSessionStorage(newAuth)
+
+            location.reload()
+        } catch (error) {
+            return toast.error(error.message)
+        }
+    }
   return (
     <div>
         <Header />
@@ -55,15 +84,15 @@ const TransferPage = () => {
             <div className="w-full h-[400px] overflow-y-auto bg-white rounded-b p-4">
                 <form className="w-full">
                     <div className="flex flex-col space-y-4">
-                        <input disabled value={'My Balance -' + auth.user.redeem_wallet} type="text" placeholder="Enter UserID" className="border p-2 rounded" />
+                        <input disabled value={'My Balance - ' + (auth.user.redeem_wallet ? auth.user.redeem_wallet : 0)} type="text" className="border p-2 rounded" />
                         <input name='userId' value={userId} onChange={handleChange} type="text" placeholder="Enter UserID" className="border p-2 rounded" />
                         <p className='w-full h-[20px] px-2 flex items-center'>{userFullname && userFullname.fullname}</p>
                         <input name='amount' value={amount} onChange={handleChange} type="number" placeholder="Enter Amount" className="border p-2 rounded" />
-                        <button disabled={!isAllowed} type="submit" className="bg-blue-500 text-white p-2 rounded">Transfer</button>
+                        <button type="submit" className="bg-blue-500 text-white p-2 rounded">Transfer</button>
                     </div>
                 </form>
 
-                <h1 className='text-bold text-[22px] mt-4 text-white w-full h-[70px] bg-red-500 p-4 rounded'>Transfer can only be done from 6th to 10th of each month.</h1>
+                {/* <h1 className='text-bold text-[22px] mt-4 text-white w-full h-[70px] bg-red-500 p-4 rounded'>Transfer can only be done from 6th to 10th of each month.</h1> */}
             </div>
         </div>
     </div>

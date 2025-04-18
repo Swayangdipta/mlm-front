@@ -39,6 +39,7 @@ function App() {
         <Route path="/deposit" element={<DepositPage />}/>
         <Route path="/fundwallet" element={<CapitalPage />}/>
         <Route path="/tokenwallet" element={<Invest />}/> 
+        <Route path="/redeemwallet" element={<Invest type='Redeem' />}/> 
         <Route path="/forgot-pass" element={<ForgotPassword />}/> 
         <Route path="/transactions/:userId" element={<Transactions />}/>
         <Route path="/admin" element={<AdminDashboard />}/>

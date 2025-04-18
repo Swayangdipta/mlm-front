@@ -311,3 +311,11 @@ export const updateUser = async (userId, data) => {
       return error
   }
 }
+
+export const transferAmount = async (userId,memberId, data) => {
+  try {
+      return axios.put(`${backend}/users/transfer/${userId}/${memberId}`, data).then(response => response)
+  } catch (error) {
+      return error
+  }
+}
