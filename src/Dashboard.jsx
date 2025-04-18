@@ -180,12 +180,14 @@ function Dashboard() {
               {/* Copy Icon */}
               <FaRegCopy
                 className="text-gray-600 text-lg cursor-pointer"
-                onClick={handleCopy} 
+                onClick={handleCopy}
               />
               {/* WhatsApp Icon */}
               <a
                 className="bg-white text-lg"
-                href="https://wa.me/917777777777"
+                href={`https://wa.me/?text=Check%20out%20this%20referral%20link:%20${encodeURIComponent(`${
+                import.meta.env.VITE_FRONTEND_URL
+              }/ih/register?sponsorId=${currentUser?.code}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
