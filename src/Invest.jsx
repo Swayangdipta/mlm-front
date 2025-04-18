@@ -74,7 +74,6 @@ const Invest = () => {
               src={logo}
               alt="logo"
               className="w-[5rem] h-[30px] bg-slate-100 rounded-3xl sm:w-[7rem] sm:h-[3rem] md:w-[9rem] md:h-[3.5rem] lg:w-[8rem] lg:h-[3rem]"
-              onClick={handleLogoClick}
             />
           </div>
 

@@ -6,7 +6,7 @@ import payment_method from './asset/Payment_Method.jpeg'
 import { createDeposit } from './helper/baseApiCalls'
 import { RiLoader3Line, RiProgress1Fill } from 'react-icons/ri'
 import { toast } from 'react-toastify'
-
+import logo from './asset/logo.png'
 const DepositPage = () => {
     const [amount,setAmount] = React.useState('')
     const [receipt,setReceipt] = React.useState(null)
@@ -68,7 +68,15 @@ const DepositPage = () => {
   return (
     <div className='w-screen min-h-screen bg-gray-100'>
         <header className='w-full flex justify-between items-center h-16 bg-blue-500 text-white text-2xl p-4 fixed top-0 left-0 z-[1000]'>
-            <Link to='/admin'><h1>AIDAM</h1></Link>
+            <Link to='/admin'>
+            <div className="logo-section flex items-center justify-center sm:h-full py-2 sm:py-0">
+                <img
+                    src={logo}
+                    alt="logo"
+                    className="w-[5rem] h-[30px] bg-slate-100 rounded-3xl sm:w-[7rem] sm:h-[3rem] md:w-[9rem] md:h-[3.5rem] lg:w-[8rem] lg:h-[3rem]"
+                />
+            </div>
+            </Link>
 
             <div className='flex items-center gap-8 cursor-pointer '>
                 <Link to='/admin/profile'>

@@ -303,3 +303,11 @@ export const getUserFullname = async (data) => {
         return error
     }
 }
+
+export const updateUser = async (userId, data) => {
+  try {
+      return axios.put(`${backend}/users/user/${userId}`, data).then(response => response)
+  } catch (error) {
+      return error
+  }
+}

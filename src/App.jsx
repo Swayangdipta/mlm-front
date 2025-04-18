@@ -35,6 +35,7 @@ function App() {
         <Route path="/transfer" element={<TransferPage />}/>
         <Route path="/Dashboard" element={<Dashboard />}/>
         <Route path="/new-joining/:sponsorId" element={<Register from="dashboard" />}/>
+        <Route path="/ih/register/:sponsorId" element={<Register from="dashboard" />}/>
         <Route path="/deposit" element={<DepositPage />}/>
         <Route path="/fundwallet" element={<CapitalPage />}/>
         <Route path="/tokenwallet" element={<Invest />}/> 

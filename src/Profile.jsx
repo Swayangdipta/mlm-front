@@ -93,16 +93,6 @@ const Profile = () => {
             </div>
           </Link>
 
-          <Link to={`/transactions/${auth.user.id}`}>
-            <div className="w-full h-[50px] mt-[30px] px-4 group rounded border-amber-500 border bg-[#00000090] shadow-inner flex items-center justify-between">
-              <BsBank className="text-white text-[24px]" />
-              <h3 className="text-white text-[24px] group-hover:text-amber-400">
-                Transactions
-              </h3>
-              <CgArrowRight className="text-white text-[24px] cursor-pointer" />
-            </div>
-          </Link>
-
           <Link to={`/profile/bank`}>
             <div className="w-full h-[50px] mt-[30px] px-4 group rounded border-amber-500 border bg-[#00000090] shadow-inner flex items-center justify-between">
               <BsBank className="text-white text-[24px]" />

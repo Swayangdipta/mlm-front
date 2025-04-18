@@ -5,7 +5,7 @@ import flag from "./assets/usaFlag.png";
 import { getAllTransactions } from "./helper/baseApiCalls";
 import { toast } from "react-toastify";
 import { removeAuthFromSessionStorage } from "./utils/ls.util";
-
+import logo from './asset/logo.png'
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const { userId } = useParams();
@@ -50,7 +50,13 @@ const Transactions = () => {
       {/* Navbar1 */}
       <div className="Navbar">
         <header className="bg-blue-500 flex justify-between items-center p-2 pb-3 fixed top-0 w-full z-10">
-          <h1 className="text-[24px] text-white">AIDAM</h1>
+          <div className="logo-section flex items-center justify-center sm:h-full py-2 sm:py-0">
+            <img
+              src={logo}
+              alt="logo"
+              className="w-[5rem] h-[30px] bg-slate-100 rounded-3xl sm:w-[7rem] sm:h-[3rem] md:w-[9rem] md:h-[3.5rem] lg:w-[8rem] lg:h-[3rem]"
+            />
+          </div>
           <div className="flex space-x-6 mt-1">
             <img src={flag} alt="USA Flag" className="w-[2.6rem] h-[1.4rem]" />
             <button className="ml-10 text-2xl flex-col" onClick={handleLogout}>

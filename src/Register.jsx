@@ -71,7 +71,6 @@ function Register({from = 'home'}) {
       const response = await register({
         sponsorId: sponsor,
         fullname,
-        username: 'AIDM' + Math.random() * 999999,
         country,
         mobile,
         email,
