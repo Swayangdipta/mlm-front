@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Header from './Header'
 import { getUserFullname } from './helper/baseApiCalls'
 import { toast } from 'react-toastify'
+import { getAuthFromSessionStorage } from './utils/ls.util'
 
 const TransferPage = () => {
     const [isAllowed,setIsAllowed] = React.useState(false)
@@ -17,6 +18,8 @@ const TransferPage = () => {
         }
     }
     ,[])
+
+    const auth = getAuthFromSessionStorage()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -52,7 +55,7 @@ const TransferPage = () => {
             <div className="w-full h-[400px] overflow-y-auto bg-white rounded-b p-4">
                 <form className="w-full">
                     <div className="flex flex-col space-y-4">
-                        <input disabled value='My Balance - 40000' type="text" placeholder="Enter UserID" className="border p-2 rounded" />
+                        <input disabled value={'My Balance -' + auth.user.redeem_wallet} type="text" placeholder="Enter UserID" className="border p-2 rounded" />
                         <input name='userId' value={userId} onChange={handleChange} type="text" placeholder="Enter UserID" className="border p-2 rounded" />
                         <p className='w-full h-[20px] px-2 flex items-center'>{userFullname && userFullname.fullname}</p>
                         <input name='amount' value={amount} onChange={handleChange} type="number" placeholder="Enter Amount" className="border p-2 rounded" />

@@ -15,7 +15,7 @@ const WithdrawalPopup = ({setIsWithdrawOpen = f => f}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if(inputs.amount > auth.user.wallet_balance){
+        if(inputs.amount > auth.user.redeem_wallet){
             return alert('Invalid amount')
         }
 

@@ -251,6 +251,15 @@ function Dashboard() {
                 </div>              
               </Link>
 
+              <Link to='/redeemwallet'>
+                <div className="bg-gradient-to-br from-sky-400 to-sky-600 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    Redeem Wallet
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-100">{auth.user.redeem_wallet}</p>
+                </div>              
+              </Link>
+
             </section>
             {/* Team Section Ends*/}
 
@@ -276,13 +285,6 @@ function Dashboard() {
                   <p className="text-2xl font-bold text-gray-100">{userData && userData.referrals.length}</p>
                 </div>              
               </Link>
-
-              <div className="bg-gradient-to-br from-amber-600 to-amber-600 shadow-md p-5 rounded-lg text-center">
-                <h3 className="text-lg font-semibold text-gray-100">
-                  My Linked Team
-                </h3>
-                <p className="text-2xl font-bold text-gray-100">{userData && (lengths.total - userData.referrals.length) > 0 ? userData && lengths.total - userData.referrals.length : userData && (lengths.total - userData.referrals.length) * -1}</p>
-              </div>
             </section>
 
             {/* Bonus Section Starts */}
