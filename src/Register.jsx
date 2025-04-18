@@ -97,8 +97,9 @@ function Register({from = 'home'}) {
 
       useEffect(()=>{
           setUserFullname({fullname: ''})
-  
-          if(sponsor.length > 4){
+
+          if(sponsor){
+            if(sponsor.length > 4){
               (async () => {
                   const res = await getUserFullname(sponsor)
                   console.log(res);
@@ -109,6 +110,7 @@ function Register({from = 'home'}) {
   
                   setUserFullname(res.data)
               })()
+          }
           }
       },[sponsor])
 
@@ -187,7 +189,7 @@ function Register({from = 'home'}) {
           <p className='w-full h-[20px] p-2 my-2 flex items-center text-white'>{userFullname && userFullname.fullname}</p>
 
           {/* Account Name */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <input
               type="text"
               id="name"
@@ -198,7 +200,7 @@ function Register({from = 'home'}) {
               onChange={handleChange}
               required
             />
-          </div>
+          </div> */}
 
           {/* Applicant Name */}
           <div className="mb-4">
