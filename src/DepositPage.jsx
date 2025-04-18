@@ -60,6 +60,13 @@ const DepositPage = () => {
         setReceipt(e.target.files[0]);
     };
 
+    const handleCopy = () => {
+        const input = document.querySelector("#usdt_address"); // targeting the input field by ID
+        input.select(); // Select the content inside the input box
+        document.execCommand("copy"); // Execute the copy command
+        alert("Copied to clipboard!"); 
+      };
+
     useEffect(()=>{
         if(!auth){
             navigate('/login')
@@ -97,7 +104,8 @@ const DepositPage = () => {
 
             <div className='w-max h-max flex flex-col items-center justify-center gap-4 z-0'>
                 <img src={payment_method} alt="payment_scanner" className='h-[calc(100vh_-_150px)] drop-shadow-lg rounded' />
-                <h1 className='text-center font-bold text-emerald-500'>USDT Address:<br /><span style={{boxShadow: "inset 0px 0px 10px #00000080"}} className='px-2 py-1 shadow-inner rounded mt-2'>0x702ff47818112d12d876ecdb9d21faf6a95f3f1e</span></h1>
+                <h1 className='text-center font-bold text-emerald-500'>USDT Address:<br /><input readOnly style={{boxShadow: "inset 0px 0px 10px #00000080"}} className='px-2 py-1 shadow-inner rounded mt-2 w-full' id='usdt_address' value="0x702ff47818112d12d876ecdb9d21faf6a95f3f1e"></input></h1>
+                <div onClick={handleCopy} className='px-4 p-2 cursor-pointer rounded shadow-md bg-sky-500 text-white font-bold'>Copy Address</div>
             </div>
 
 
