@@ -99,17 +99,20 @@ const DepositPage = () => {
             </div>
         </header>
 
-        <div className='w-screen p-4 mt-16 h-max flex flex-col md:flex-row items-start justify-center gap-32 select-none'>
+        <div className='w-screen p-4 mt-16 h-max flex flex-col md:flex-row items-start justify-center gap-10 sm:gap-32 select-none'>
             {/* <AdminUserTable /> */}
 
             <div className='w-max h-max flex flex-col items-center justify-center gap-4 z-0'>
-                <img src={payment_method} alt="payment_scanner" className='h-[calc(100vh_-_150px)] drop-shadow-lg rounded' />
-                <h1 className='text-center font-bold text-emerald-500'>USDT Address:<br /><input readOnly style={{boxShadow: "inset 0px 0px 10px #00000080"}} className='px-2 py-1 shadow-inner rounded mt-2 w-full' id='usdt_address' value="0x702ff47818112d12d876ecdb9d21faf6a95f3f1e"></input></h1>
-                <div onClick={handleCopy} className='px-4 p-2 cursor-pointer rounded shadow-md bg-sky-500 text-white font-bold'>Copy Address</div>
+                <img src={payment_method} alt="payment_scanner" className='w-[90vw] sm:w-auto sm:h-[calc(100vh_-_300px)] drop-shadow-lg rounded' />
+                <h1 className='text-center font-bold text-emerald-500 w-full'>USDT Address:<br /><input readOnly style={{boxShadow: "inset 0px 0px 10px #00000080"}} className='px-2 py-1 shadow-inner rounded mt-2 w-full' id='usdt_address' value="0xFa388258810F033c172385257393c8B75f7A2e7A"></input></h1>
+                <div className='w-full h-max flex items-center justify-center gap-4'>
+                    <a target='_blank' className='p-2 px-4 cursor-pointer rounded shadow-md bg-emerald-500 text-white font-bold' href='https://link.trustwallet.com/send?coin=20000714&address=0xFa388258810F033c172385257393c8B75f7A2e7A&token_id=0x55d398326f99059fF775485246999027B3197955'>Pay Now</a>
+                    <div onClick={handleCopy} className='px-4 p-2 cursor-pointer rounded shadow-md bg-sky-500 text-white font-bold'>Copy Address</div>
+                </div>
             </div>
 
 
-            <form className='flex flex-col gap-4 p-4 bg-white rounded-lg shadow-lg md:mr-4' onSubmit={handleSubmit}>
+            <form className='mx-auto sm:mx-0 flex flex-col gap-4 p-4 bg-white rounded-lg shadow-lg md:mr-4' onSubmit={handleSubmit}>
                 <h1 className='text-sky-500 text-[22px] font-bold underline underline-offset-4 mr-10'>
                     Deposit Request Form
                 </h1>

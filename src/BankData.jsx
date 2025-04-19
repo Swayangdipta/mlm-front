@@ -12,14 +12,10 @@ const BankData = () => {
   const auth = getAuthFromSessionStorage();
   const navigate = useNavigate();
   const [inputs,setInputs] = useState({
-    accountName: '',
-    accountNumber: '',
-    confirmAccountNumber: '',
-    ifscCode: '',
-    bankName: ''
+    wallet_address: auth.user.wallet_address || '',
   })
 
-  const {accountName,accountNumber,ifscCode,confirmAccountNumber,bankName} = inputs
+  const {wallet_address} = inputs
 
   const handleLogout = () => {
     removeAuthFromSessionStorage();
@@ -33,22 +29,26 @@ const BankData = () => {
   const handleSubmit = async e => {
     e.preventDefault()
 
-    if(accountNumber.length < 5 || accountNumber !== confirmAccountNumber){
-      return toast.error('Account numbers do not match.')
-    }
+    // if(accountNumber.length < 5 || accountNumber !== confirmAccountNumber){
+    //   return toast.error('Account numbers do not match.')
+    // }
 
-    if(ifscCode.length < 11){
-      return toast.error('Invalid IFSC Code')
+    // if(ifscCode.length < 11){
+    //   return toast.error('Invalid IFSC Code')
+    // }
+
+    if(wallet_address.length < 5){
+      return toast.error('Invalid Wallet Address')
     }
 
     try {
-      const res = await updateUser(auth.user.id, {accountName, accountNumber, bankName, ifscCode})
+      const res = await updateUser(auth.user.id, {wallet_address})
 
       if(res.status !== 200){
         return toast.error("Updation Faild")
       }
 
-      let newUser = {...auth.user, accountName, accountNumber, bankName, ifscCode}
+      let newUser = {...auth.user, wallet_address}
       let newAuth = {...auth, user: newUser}
       setAuthInSessionStorage(newAuth)
 
@@ -105,18 +105,18 @@ const BankData = () => {
               <thead className="w-full bg-zinc-300 border">
                 <tr>
                   <th className="border border-zinc-400 text-xs md:text-base">Account Holder Name</th>
-                  <th className="border border-zinc-400 text-xs md:text-base">Bank Name</th>
-                  <th className="border border-zinc-400 text-xs md:text-base">IFSC Code</th>
-                  <th className="border border-zinc-400 text-xs md:text-base">Account Number</th>
+                  <th className="border border-zinc-400 text-xs md:text-base">UserId</th>
+                  <th className="border border-zinc-400 text-xs md:text-base">Mobile</th>
+                  <th className="border border-zinc-400 text-xs md:text-base">Wallet Address</th>
                   <th className="border border-zinc-400 text-xs md:text-base">Action</th>
                 </tr>
               </thead>
               <tbody className="bg-zinc-200 w-full text-center text-xs md:text-base">
                 <tr className="border">
-                  <td className="border border-zinc-400">{auth.user.accountName || '-'}</td>
-                  <td className="border border-zinc-400">{auth.user.bankName || '-'}</td>
-                  <td className="border border-zinc-400">{auth.user.ifscCode || '-'}</td>
-                  <td className="border border-zinc-400">{auth.user.accountNumber || '-'}</td>
+                  <td className="border border-zinc-400">{auth.user.fullname || '-'}</td>
+                  <td className="border border-zinc-400">{auth.user.code || '-'}</td>
+                  <td className="border border-zinc-400">{auth.user.mobile || '-'}</td>
+                  <td className="border border-zinc-400">{auth.user.wallet_address || '-'}</td>
                   <td className="border border-zinc-400">
                     <h4 onClick={e => setIsUpdateOpen(true)} className="px-1 py-1 rounded bg-amber-700 text-zinc-100 hover:text-zinc-300 cursor-pointer">
                       Update
@@ -128,33 +128,17 @@ const BankData = () => {
             {
               updateOpen && (
                 <div className='w-full h-full fixed top-[60px] left-0 bg-[#00000080] flex items-center justify-center'>
-                  <div className='w-[300px] min-h-[400px] rounded bg-white relative top-0 p-2'>
-                    <h1 className='underline font-semibold text-[18px]'>Update bank details</h1>
+                  <div className='w-[300px] h-max rounded bg-white relative top-0 p-2'>
+                    <h1 className='underline font-semibold text-[18px]'>Update Wallet Address</h1>
                     <div onClick={e => setIsUpdateOpen(false)} className='cursor-pointer w-[40px] h-[40px] absolute right-[-15px] top-[-15px] rounded-full bg-rose-500 flex justify-center items-center'> 
                       <CgClose className='text-white text-[20px]' />
                     </div>
                     <form className='mt-4' onSubmit={handleSubmit}>
                       <div className='mt-2'>
-                        <label className='w-full' htmlFor="accountName">Account Holder Name</label>
-                        <input onChange={handleChange} value={accountName} name='accountName' className='w-full h-[30px] p-2 bg-slate-300 rounded mt-2 outline-none' type="text" placeholder='Type here...' />
+                        <label className='w-full' htmlFor="wallet_address">USDT (BP20) Address</label>
+                        <input onChange={handleChange} value={wallet_address} name='wallet_address' className='w-full h-[30px] p-2 bg-slate-300 rounded mt-2 outline-none' type="text" placeholder='Type here...' />
                       </div>
-                      <div className='mt-2'>
-                        <label className='w-full' htmlFor="accountNumber">Account Number</label>
-                        <input onChange={handleChange} value={accountNumber} name='accountNumber' className='w-full h-[30px] p-2 bg-slate-300 rounded mt-2 outline-none' type="text" placeholder='Type here...' />
-                      </div>
-                      <div className='mt-2'>
-                        <label className='w-full' htmlFor="confirmAccountNumber">Confirm Account Number</label>
-                        <input onChange={handleChange} value={confirmAccountNumber} name='confirmAccountNumber' className='w-full h-[30px] p-2 bg-slate-300 rounded mt-2 outline-none' type="text" placeholder='Type here...' />
-                      </div>
-                      <div className='mt-2'>
-                        <label className='w-full' htmlFor="bankName">Bank Name</label>
-                        <input onChange={handleChange} value={bankName} name='bankName' className='w-full h-[30px] p-2 bg-slate-300 rounded mt-2 outline-none' type="text" placeholder='Type here...' />
-                      </div>
-                      <div className='mt-2'>
-                        <label className='w-full' htmlFor="ifscCode">IFSC Code</label>
-                        <input onChange={handleChange} value={ifscCode} name='ifscCode' className='w-full h-[30px] p-2 bg-slate-300 rounded mt-2 outline-none' type="text" placeholder='Type here...' />
-                      </div>
-                      <button type="submit" className='mt-2 w-full h-[30px] bg-green-600 rounded text-white'>Update</button>
+                      <button type="submit" className='mt-2 w-full h-[30px] bg-green-600 rounded text-white'>Update Walllet</button>
                     </form>
                   </div>
                 </div>
