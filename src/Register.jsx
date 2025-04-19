@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 function Register({from = 'home'}) {
   const navigate = useNavigate();
+  const [sortedCountries, setSortedCountries] = useState([]);
 
   const handleLoginButtonClick = () => {
     navigate("/login");
@@ -94,24 +95,39 @@ function Register({from = 'home'}) {
     }
   }, [auth, navigate]);
 
-      useEffect(()=>{
-          setUserFullname({fullname: ''})
+    useEffect(()=>{
+        setUserFullname({fullname: ''})
 
-          if(sponsor){
-            if(sponsor.length > 4){
-              (async () => {
-                  const res = await getUserFullname(sponsor)
-                  console.log(res);
-                  
-                  if(res.status !== 200){
-                      return
-                  }
-  
-                  setUserFullname(res.data)
-              })()
-          }
-          }
-      },[sponsor])
+        if(sponsor){
+          if(sponsor.length > 4){
+            (async () => {
+                const res = await getUserFullname(sponsor)
+                console.log(res);
+                
+                if(res.status !== 200){
+                    return
+                }
+
+                setUserFullname(res.data)
+            })()
+        }
+        }
+    },[sponsor])
+
+    useEffect(() => {
+      if(sortedCountries.length === 0) {
+        (async () => {
+          const res = await fetch('https://restcountries.com/v3.1/all')
+          const data = await res.json()
+          const sortedData = data.sort((a, b) => a.name.common.localeCompare(b.name.common))
+          console.log(sortedData);
+          
+          setSortedCountries(sortedData)
+        }
+        )()
+      }
+    },[])
+    
 
   return (
     <div className="flex justify-center items-center flex-col min-h-screen overflow-y-auto bg-center bg-cover bg-no-repeat bg-[url(https://png.pngtree.com/background/20210717/original/pngtree-sci-fi-city-light-dot-luminous-building-street-purple-technology-background-picture-image_1446716.jpg)]">
@@ -241,10 +257,13 @@ function Register({from = 'home'}) {
               <option value="" disabled selected>
                 Select Country
               </option>
-              <option value="USA">USA</option>
-              <option value="India">India</option>
-              <option value="UK">UK</option>
-              <option value="Australia">Australia</option>
+              {
+                sortedCountries.length > 0  && sortedCountries.map((country, index) => (
+                  <option key={index} value={country.name.common}>
+                    {country.name.common}
+                  </option>
+                ))
+              }
             </select>
           </div>
 
