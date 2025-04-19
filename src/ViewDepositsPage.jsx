@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuthFromSessionStorage, removeAuthFromSessionStorage } from './utils/ls.util'
 import { FaSignOutAlt, FaUser } from 'react-icons/fa'
+import DepositTable from './DepositTable'
 
 const ViewDepositsPage = () => {
     const navigate = useNavigate()
@@ -43,6 +44,7 @@ const ViewDepositsPage = () => {
       </header>
 
       <div className='w-screen p-4 mt-16 min-h-10 h-max'>
+        <DepositTable />
       </div>
       </div>
   )

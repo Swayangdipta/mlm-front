@@ -30,7 +30,6 @@ const AdminUserTable = () => {
   useEffect(() => {
     const filtered = users.filter(
       (user) =>
-        user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
         user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
         user.fullname.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -153,6 +152,9 @@ const AdminUserTable = () => {
               <th className="border p-2 cursor-pointer" onClick={() => handleSort("email")}>
                 Email {sortField === "email" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
               </th>
+              <th className="border p-2 cursor-pointer" >
+                Mobile
+              </th>
               <th className="border p-2 cursor-pointer" onClick={() => handleSort("totalBusiness")}>
                 Business {sortField === "totalBusiness" ? (sortOrder === "asc" ? "↑" : "↓") : ""}
               </th>
@@ -164,9 +166,10 @@ const AdminUserTable = () => {
               currentUsers.map((user, index) => (
                 <tr key={user._id} className="text-center">
                   <td className="border p-2">{indexOfFirstUser + index + 1}</td>
-                  <td className="border p-2">{user.username}</td>
-                  <td className="border p-2">{user.fullname}</td>
+                  <td className="border p-2">{user.fullname || '-'}</td>
+                  <td className="border p-2">{user.code}</td>
                   <td className="border p-2">{user.email}</td>
+                  <td className="border p-2">{user.mobile}</td>
                   <td className="border p-2">{user.totalBusiness || 0}</td>
                   <td className="border p-2">
                     <button
@@ -241,7 +244,6 @@ const AdminUserTable = () => {
         </div>
         )}
 
-        // Wallet Top-Up Modal
         {isTopUpModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-md shadow-lg w-80">

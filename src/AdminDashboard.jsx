@@ -78,12 +78,12 @@ const AdminDashboard = () => {
                 <h1 className='text-[26px] font-bold text-amber-500'>Manage Users</h1>
             </div>
         </Link>
-        <Link to='/admin/investments'>
+        {/* <Link to='/admin/investments'>
             <div className='w-[250px] h-[180px] bg-white rounded-md shadow-md shadow-purple-300 text-center p-4 flex flex-col justify-center items-center'>
                 <BiSolidBank className='text-[32px] text-purple-500'  />
-                <h1 className='text-[26px] font-bold text-purple-500'>View Investments</h1>
+                <h1 className='text-[26px] font-bold text-purple-500'>View Deposits</h1>
             </div>
-        </Link>
+        </Link> */}
 
         <Link to='/admin/request/withdrawal'>
             <div className='w-[250px] h-[180px] bg-white rounded-md shadow-md shadow-sky-300 text-center p-4 flex flex-col justify-center items-center'>

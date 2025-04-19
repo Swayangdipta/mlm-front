@@ -335,3 +335,69 @@ export const resetPassword = async (data, token) => {
       return error
   }
 }
+
+export const getAllDeposits = async (data) => {
+  try {
+      const token = JSON.parse(sessionStorage.getItem("auth")); // Get token from local storage or state
+        console.log(token, data);
+        
+      if (!token.token) {
+        return { status: 401, data: { message: "Unauthorized" } };
+      }
+  
+      const response = await axios.get(`${backend}/api/deposit/all`,{}, {
+        headers: {
+          Authorization: `Bearer ${token.token}`, // Attach token in headers
+        },
+      });
+  
+      return response;
+    } catch (error) {
+      console.error("Error fetching deposits:", error);
+      return { status: error.response?.status || 500, data: [] };
+    }
+}
+
+export const approveDeposit = async (data) => {
+  try {
+      const token = JSON.parse(sessionStorage.getItem("auth")); // Get token from local storage or state
+        console.log(token, data);
+        
+      if (!token.token) {
+        return { status: 401, data: { message: "Unauthorized" } };
+      }
+  
+      const response = await axios.post(`${backend}/api/deposit/approve/${data}`,{}, {
+        headers: {
+          Authorization: `Bearer ${token.token}`, // Attach token in headers
+        },
+      });
+  
+      return response;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      return { status: error.response?.status || 500, data: [] };
+    }
+}
+
+export const rejectDeposit = async (data) => {
+  try {
+      const token = JSON.parse(sessionStorage.getItem("auth")); // Get token from local storage or state
+        console.log(token, data);
+        
+      if (!token.token) {
+        return { status: 401, data: { message: "Unauthorized" } };
+      }
+  
+      const response = await axios.post(`${backend}/api/deposit/reject/${data}`,{}, {
+        headers: {
+          Authorization: `Bearer ${token.token}`, // Attach token in headers
+        },
+      });
+  
+      return response;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      return { status: error.response?.status || 500, data: [] };
+    }
+}

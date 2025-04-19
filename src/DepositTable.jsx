@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getAllWithdrawals, approveWithdrawal } from "./helper/baseApiCalls";
+import { approveDeposit, approveWithdrawal, getAllDeposits, rejectDeposit } from "./helper/baseApiCalls";
 import { toast } from "react-toastify";
 
-const WithdrawalTable = () => {
+const DepositTable = () => {
   const [withdrawals, setWithdrawals] = useState([]);
   const [filteredWithdrawals, setFilteredWithdrawals] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,7 +13,7 @@ const WithdrawalTable = () => {
 
   const fetchWithdrawals = async () => {
     try {
-      const response = await getAllWithdrawals();
+      const response = await getAllDeposits();
       if (response.status === 200) {
         if (response.message) {
           return toast.error(response.message);
@@ -47,16 +47,31 @@ const WithdrawalTable = () => {
   // Approve Function
   const handleApprove = async (id) => {
     try {
-      const response = await approveWithdrawal(id);
+      const response = await approveDeposit(id);
       if (response.status === 200) {
-        toast.success("Withdrawal approved successfully");
+        toast.success("Deposit approved successfully");
         fetchWithdrawals();
       } else {
-        toast.error("Failed to approve withdrawal");
+        toast.error("Failed to approve deposit");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Error approving withdrawal");
+      toast.error("Error approving deposit");
+    }
+  };
+
+  const handleReject = async (id) => {
+    try {
+      const response = await rejectDeposit(id);
+      if (response.status === 200) {
+        toast.success("Deposit rejected successfully");
+        fetchWithdrawals();
+      } else {
+        toast.error("Failed to reject deposit");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error rejecting deposit");
     }
   };
 
@@ -67,12 +82,12 @@ const WithdrawalTable = () => {
 
   return (
     <div className="p-4 bg-white shadow-lg rounded-md">
-      <h2 className="text-xl font-semibold mb-4">Withdrawal Management</h2>
+      <h2 className="text-xl font-semibold mb-4">Deposit Management</h2>
 
       <div className="flex justify-between items-center mb-4">
         <input
           type="text"
-          placeholder="Search by userID"
+          placeholder="Search by userId"
           className="border p-2 rounded w-1/3"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -82,9 +97,10 @@ const WithdrawalTable = () => {
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
         >
-          <option value="all">All Withdrawals</option>
+          <option value="all">All Deposits</option>
           <option value="pending">Pending</option>
           <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
         </select>
       </div>
 
@@ -97,6 +113,7 @@ const WithdrawalTable = () => {
               <th className="border p-2">Email</th>
               <th className="border p-2">Amount</th>
               <th className="border p-2">Requested At</th>
+              <th className="border p-2">Receipt</th>
               <th className="border p-2">Status</th>
               <th className="border p-2">Action</th>
             </tr>
@@ -109,11 +126,28 @@ const WithdrawalTable = () => {
                   <td className="border p-2">{withdrawal.user.code}</td>
                   <td className="border p-2">{withdrawal.user.email}</td>
                   <td className="border p-2">${withdrawal.amount}</td>
-                  <td className="border p-2">{new Date(withdrawal.requestedAt).toLocaleString()}</td>
+                  <td className="border p-2">{withdrawal.createdAt.split('T')[0].toLocaleString()}</td>
+                  <td className="border p-2 underline text-sky-500"><a href={withdrawal.receiptUrl} target="_blank">View</a></td>
                   <td className="border p-2">{withdrawal.status}</td>
                   <td className="border p-2">
                     {withdrawal.status === "pending" ? (
-                      <button
+                        <>
+                        <button
+                            className="bg-green-500 text-white px-3 py-1 rounded"
+                            onClick={() => handleApprove(withdrawal._id)}
+                        >
+                            Approve
+                        </button>        
+
+                        <button
+                            className="bg-red-500 text-white px-3 py-1 rounded ml-2"
+                            onClick={() => handleReject(withdrawal._id)}
+                        >
+                            Reject
+                        </button>                
+                        </>
+                    ) : withdrawal.status === 'rejected' ? (
+                        <button
                         className="bg-green-500 text-white px-3 py-1 rounded"
                         onClick={() => handleApprove(withdrawal._id)}
                       >
@@ -155,6 +189,6 @@ const WithdrawalTable = () => {
       </div>
     </div>
   );
-};
+}
 
-export default WithdrawalTable;
+export default DepositTable
