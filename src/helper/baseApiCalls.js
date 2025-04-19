@@ -319,3 +319,19 @@ export const transferAmount = async (userId,memberId, data) => {
       return error
   }
 }
+
+export const generatePasswordResetLink = async (data) => {
+  try {
+      return axios.post(`${backend}/auth/forgot-password`, data).then(response => response)
+  } catch (error) {
+      return error
+  }
+}
+
+export const resetPassword = async (data, token) => {
+  try {
+      return axios.put(`${backend}/auth/reset-password/${token}`, data).then(response => response)
+  } catch (error) {
+      return error
+  }
+}

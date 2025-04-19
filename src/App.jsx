@@ -41,6 +41,7 @@ function App() {
         <Route path="/tokenwallet" element={<Invest />}/> 
         <Route path="/redeemwallet" element={<Invest type='Redeem' />}/> 
         <Route path="/forgot-pass" element={<ForgotPassword />}/> 
+        <Route path="/reset-password/:token" element={<ForgotPassword type="reset" />}/> 
         <Route path="/transactions/:userId" element={<Transactions />}/>
         <Route path="/admin" element={<AdminDashboard />}/>
         <Route path="/admin/manage-users" element={<UserManage />}/>

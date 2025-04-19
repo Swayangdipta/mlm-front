@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import logo from "./asset/logo.png";
 import { TbLogin2 } from "react-icons/tb";
-import { login, loginAdmin } from "./helper/baseApiCalls";
+import { generatePasswordResetLink, login, loginAdmin, resetPassword } from "./helper/baseApiCalls";
 import {
   getAuthFromSessionStorage,
   setAuthInSessionStorage,
 } from "./utils/ls.util";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
-export default function ForgotPassword({ isAdmin }) {
+export default function ForgotPassword({ type = "def" }) {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const {token} = useParams()
   const handleLoginButtonClick = () => {
     navigate("/login");
   };
@@ -26,7 +27,7 @@ export default function ForgotPassword({ isAdmin }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const auth = getAuthFromSessionStorage();
 
@@ -35,22 +36,24 @@ export default function ForgotPassword({ isAdmin }) {
     setErrorMessage("");
 
     try {
-      let response;
-      if (isAdmin) {
-        response = await loginAdmin({ username });
-      } else {
-        response = await login({ username });
-      }
+      const response = type === 'def' ? await generatePasswordResetLink({email}) : await resetPassword({password: email}, token);
 
-      if (response.status === 200) {
-        setAuthInSessionStorage(response.data);
-        navigate(isAdmin ? "/admin" : "/Dashboard");
-      } else {
-        setErrorMessage("Login failed. Please try again.");
+      if (response.status !== 201) {
+        setErrorMessage(response.data.message);
+        return;
+      }
+      if (response.status === 201) {
+        if(type === 'def') {
+          toast.success("Password reset link sent to your email.");
+        }
+        else {
+          toast.success("Password reset successfully.");
+        }
+        return;
       }
     } catch (error) {
       console.log(error);
-      setErrorMessage("Invalid Username");
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -136,25 +139,49 @@ export default function ForgotPassword({ isAdmin }) {
           )}
 
           <form onSubmit={handleSubmit}>
-            <div className="mb-4 pt-6">
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
-                style={{
-                  boxShadow:
-                    "inset 0px 4px 8px rgba(0, 0, 0, 0.6), " + // Darker shadow on top (pressed effect)
-                    "inset 0px -4px 8px rgba(255, 255, 255, 0.2), " + // Lighter bottom shadow (soft glow)
-                    "inset 4px 0px 8px rgba(0, 0, 0, 0.6), " + // Darker shadow on the left (pressed effect)
-                    "inset -4px 0px 8px rgba(255, 255, 255, 0.2)", // Lighter right shadow (soft glow)
-                }}
-                placeholder="Enter Username"
-                required
-              />
-            </div>
+            {
+              type === 'reset' ? (
+                <div className="mb-4 pt-6">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  style={{
+                    boxShadow:
+                      "inset 0px 4px 8px rgba(0, 0, 0, 0.6), " + // Darker shadow on top (pressed effect)
+                      "inset 0px -4px 8px rgba(255, 255, 255, 0.2), " + // Lighter bottom shadow (soft glow)
+                      "inset 4px 0px 8px rgba(0, 0, 0, 0.6), " + // Darker shadow on the left (pressed effect)
+                      "inset -4px 0px 8px rgba(255, 255, 255, 0.2)", // Lighter right shadow (soft glow)
+                  }}
+                  placeholder="Enter New Password"
+                  required
+                />
+              </div>
+              ) : (
+                <div className="mb-4 pt-6">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+                  style={{
+                    boxShadow:
+                      "inset 0px 4px 8px rgba(0, 0, 0, 0.6), " + // Darker shadow on top (pressed effect)
+                      "inset 0px -4px 8px rgba(255, 255, 255, 0.2), " + // Lighter bottom shadow (soft glow)
+                      "inset 4px 0px 8px rgba(0, 0, 0, 0.6), " + // Darker shadow on the left (pressed effect)
+                      "inset -4px 0px 8px rgba(255, 255, 255, 0.2)", // Lighter right shadow (soft glow)
+                  }}
+                  placeholder="Enter Email Address"
+                  required
+                />
+              </div>                
+              )
+            }
 
             <div className="flex sm:flex-row justify-between  space-x-10">
               <p>
