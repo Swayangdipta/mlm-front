@@ -51,12 +51,12 @@ const AdminDashboard = () => {
         <h1>Admin Dashboard</h1>
 
         <div className='flex items-center gap-8 cursor-pointer '>
-            <Link to='/admin/profile'>
+            {/* <Link to='/admin/profile'>
                 <div className='flex flex-col justify-center items-center group'>
                     <FaUser className='text-[20px] cursor-pointer  group-hover:text-amber-300 mt-2' />
                     <p className='text-[14px] -mt-2 group-hover:text-amber-300'>Profile</p>
                 </div>
-            </Link>
+            </Link> */}
             <div className='flex flex-col justify-center items-center group' onClick={handleLogout}>
                 <FaSignOutAlt className='text-[20px] cursor-pointer group-hover:text-rose-300 mt-2' />
                 <p className='text-[14px] -mt-2 group-hover:text-rose-300'>Logout</p>

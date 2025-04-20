@@ -121,6 +121,7 @@ const DepositTable = () => {
           <tbody>
             {currentWithdrawals.length > 0 ? (
               currentWithdrawals.map((withdrawal, index) => (
+                withdrawal.user && withdrawal.user.code && (
                 <tr key={withdrawal._id} className="text-center">
                   <td className="border p-2">{indexOfFirstWithdrawal + index + 1}</td>
                   <td className="border p-2">{withdrawal.user.code}</td>
@@ -158,6 +159,7 @@ const DepositTable = () => {
                     )}
                   </td>
                 </tr>
+                )
               ))
             ) : (
               <tr>
