@@ -82,7 +82,7 @@ const TransferPage = () => {
         <div className='w-[95%] bg-sky-500 rounded mx-auto mt-[120px] min-h-10 h-max'>
             <h1 className='text-bold text-[22px] text-white w-full h-[70px] bg-sky-500 p-4 rounded-t'>Transfer Tokens</h1>
             <div className="w-full h-[400px] overflow-y-auto bg-white rounded-b p-4">
-                <form className="w-full">
+                <form className="w-full" onSubmit={handleTransfer}>
                     <div className="flex flex-col space-y-4">
                         <input disabled value={'My Balance - ' + (auth.user.redeem_wallet ? auth.user.redeem_wallet : 0)} type="text" className="border p-2 rounded" />
                         <input name='userId' value={userId} onChange={handleChange} type="text" placeholder="Enter UserID" className="border p-2 rounded" />
