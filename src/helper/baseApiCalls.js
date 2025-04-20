@@ -401,3 +401,19 @@ export const rejectDeposit = async (data) => {
       return { status: error.response?.status || 500, data: [] };
     }
 }
+
+export const getCreditsForUser = async (data) => {
+  try {
+      return axios.get(`${backend}/users/deposits/${data}`).then(response => response)
+  } catch (error) {
+      return error
+  }
+}
+
+export const getWithdrawalsForUser = async (data) => {
+  try {
+      return axios.get(`${backend}/users/withdrawals/${data}`).then(response => response)
+  } catch (error) {
+      return error
+  }
+}
