@@ -7,7 +7,7 @@ const CreditsPage = ({from = 'credits'}) => {
     const [withdrawals, setWithdrawals] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const withdrawalsPerPage = 15;
-    const {auth} = getAuthFromSessionStorage()
+    const auth = getAuthFromSessionStorage()
 
     const fetchWithdrawals = async () => {
         try {
