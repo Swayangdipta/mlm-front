@@ -16,7 +16,7 @@ const CreditsPage = ({from = 'credits'}) => {
                 if (response.message) {
                     return toast.error(response.message);
                 }
-                setWithdrawals(response.data);
+                setWithdrawals(response.data.deposits);
             }
         } catch (error) {
             console.log(error);
