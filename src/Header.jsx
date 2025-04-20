@@ -53,14 +53,11 @@ const Header = () => {
     {/* Navbar2 */}
     <nav className="bg-blue-900 text-white flex flex-grow flex-col items-center p-3 m-0 fixed top-14 w-full" style={{ zIndex: 5 }}>
       <div className="flex flex-wrap justify-between w-full">
-        <button className="font-semibold">Home</button>
-        <Link to="/fundwallet">
-          <button className="font-semibold hidden sm:block">Fund Wallet</button>
+        <Link to="/dashboard">
+          <button className="font-semibold">Home</button>
         </Link>
-        <button className="font-semibold  hidden sm:block">AI</button>
-        <Link to="/tokenwallet">
-          <button className="font-semibold  hidden sm:block">Token Wallet</button>
-        </Link>
+
+
         <Link to="/profile">
           <button className="font-semibold relative top-0 group  hidden sm:block">
             Profile
