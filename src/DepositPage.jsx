@@ -3,7 +3,7 @@ import { FaSignOutAlt, FaUpload, FaUser } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { getAuthFromSessionStorage, removeAuthFromSessionStorage } from './utils/ls.util'
 import payment_method from './asset/Payment_Method.jpeg'
-import { createDeposit } from './helper/baseApiCalls'
+import { createDeposit, getMyPendingDeposits } from './helper/baseApiCalls'
 import { RiLoader3Line, RiProgress1Fill } from 'react-icons/ri'
 import { toast } from 'react-toastify'
 import logo from './asset/logo.png'
@@ -11,6 +11,7 @@ const DepositPage = () => {
     const [amount,setAmount] = React.useState('')
     const [receipt,setReceipt] = React.useState(null)
     const [isLoading,setIsLoading] = React.useState(false)
+    const [pendingDeposits,setPendingDeposits] = React.useState([])
     const navigate = useNavigate()
     const auth = getAuthFromSessionStorage()
     
@@ -71,6 +72,18 @@ const DepositPage = () => {
         if(!auth){
             navigate('/login')
         }
+
+        (async () => { 
+            const response = await getMyPendingDeposits(auth.user.id)
+            console.log(response);
+            
+            if(response.status === 200){
+                setPendingDeposits(response.data)
+                return
+            }
+
+            return toast.error('Faild to get pending deposits')
+        } )()
     },[])
   return (
     <div className='w-screen min-h-screen bg-gray-100'>
@@ -99,12 +112,12 @@ const DepositPage = () => {
             </div>
         </header>
 
-        <div className='w-screen p-4 mt-16 h-max flex flex-col md:flex-row items-start justify-center gap-10 sm:gap-32 select-none'>
+        <div className='w-[100vw] p-4 mt-16 h-max flex flex-col md:flex-row items-start justify-center gap-10 sm:gap-32 select-none'>
             {/* <AdminUserTable /> */}
 
-            <div className='w-max h-max flex flex-col items-center justify-center gap-4 z-0'>
-                <img src={payment_method} alt="payment_scanner" className='w-[90vw] sm:w-auto sm:h-[calc(100vh_-_300px)] drop-shadow-lg rounded' />
-                <h1 className='text-center font-bold text-emerald-500 w-full'>USDT Address:<br /><input readOnly style={{boxShadow: "inset 0px 0px 10px #00000080"}} className='px-2 py-1 shadow-inner rounded mt-2 w-full' id='usdt_address' value="0xFa388258810F033c172385257393c8B75f7A2e7A"></input></h1>
+            <div className=' mx-auto sm:mx-0 w-max h-max flex flex-col items-center justify-center gap-4 z-0'>
+                <img src={payment_method} alt="payment_scanner" className='w-[60vw] sm:w-auto sm:h-[calc(100vh_-_300px)] drop-shadow-lg rounded' />
+                <h1 className='text-center font-bold text-emerald-500 w-full'>USDT (BP20) Address:<br /><textarea readOnly style={{boxShadow: "inset 0px 0px 10px #00000080"}} className='px-2 py-1 shadow-inner rounded mt-2 w-[90%] h-max overflow-clip text-wrap ' id='usdt_address' value="0xFa388258810F033c172385257393c8B75f7A2e7A"></textarea></h1>
                 <div className='w-full h-max flex items-center justify-center gap-4'>
                     <a target='_blank' className='p-2 px-4 cursor-pointer rounded shadow-md bg-emerald-500 text-white font-bold' href='https://link.trustwallet.com/send?coin=20000714&address=0xFa388258810F033c172385257393c8B75f7A2e7A&token_id=0x55d398326f99059fF775485246999027B3197955'>Pay Now</a>
                     <div onClick={handleCopy} className='px-4 p-2 cursor-pointer rounded shadow-md bg-sky-500 text-white font-bold'>Copy Address</div>
@@ -152,6 +165,42 @@ const DepositPage = () => {
                     }
                 </button>
             </form>
+        </div>
+
+        <div className='w-[95%] mx-auto mt-10 p-4 bg-white rounded-lg shadow-lg mb-14'>
+            <h1 className='font-bold underline underline-offset-4 text-orange-600 text-[18px]'>Pending Deposit Requests</h1>
+
+            {
+                pendingDeposits && pendingDeposits.length > 0 ? (
+                    <table className='w-full mt-4'>
+                        <thead className='bg-sky-500 text-white'>
+                            <tr>
+                                <th className='p-2'>Date</th>
+                                <th className='p-2'>Amount</th>
+                                <th className='p-2'>Receipt</th>
+                                <th className='p-2'>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody className='text-center'>
+                            {
+                                pendingDeposits.map((deposit,index) => (
+                                    <tr key={deposit._id}>
+                                        <td className='p-2'>{deposit.createdAt.split('T')[0]}</td>
+                                        <td className='p-2'>${deposit.amount}</td>
+                                        <td className='p-2 underline text-sky-500'><a href={deposit.receiptUrl} target="_blank">View</a></td>
+                                        <td className='p-2 text-orange-500 font-bold'>{deposit.status}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className='flex flex-col items-center justify-center gap-4 mt-10'>
+                        {/* <RiProgress1Fill className='text-[50px] text-orange-400' /> */}
+                        <h1 className='text-[20px] font-bold text-orange-400'>No Pending Deposits</h1>
+                    </div>
+                )
+            }
         </div>
 
     </div>

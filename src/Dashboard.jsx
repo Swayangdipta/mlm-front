@@ -292,37 +292,43 @@ function Dashboard() {
               Bonus Details
             </h1>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-              <div className="bg-gradient-to-br from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
-                <h3 className="text-lg font-semibold text-gray-100">
-                  Referral Benefit
-                </h3>
-                <p className="text-2xl font-bold text-gray-100">{userData && userData.referral_wallet}</p>
-              </div>
+              <Link to='/referral-benefit'>
+                <div className="bg-gradient-to-br from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    Referral Benefit
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-100">{userData && userData.referral_wallet}</p>
+                </div>
+              </Link>
 
-              {/* <div className="bg-gradient-to-tl from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
+
+              <div className="bg-gradient-to-tl from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   Team Benefit
                 </h3>
                 <p className="text-2xl font-bold text-gray-100">00.00</p>
-              </div> */}
-
-              <div className="bg-gradient-to-br from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
-                <h3 className="text-lg font-semibold text-gray-100">
-                  Daily Reward
-                </h3>
-                <p className="text-2xl font-bold text-gray-100">{userData && userData.daily_rewards}</p>
               </div>
+              <Link to='/credits'>
+                <div className="bg-gradient-to-br from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    Daily Reward
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-100">{userData && userData.daily_rewards}</p>
+                </div>
+              </Link>
             </section>
             {/* Bonus Section Ends */}
 
             {/* row2 */}
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+              <Link to='/withdrawals'>
               <div className="bg-gradient-to-r from-rose-400 to-red-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   Total Withdrawl
                 </h3>
                 <p className="text-2xl font-bold text-gray-100">00.00</p>
               </div>
+              </Link>
 
               <div className="bg-gradient-to-br from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">

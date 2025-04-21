@@ -20,6 +20,7 @@ import ViewDepositsPage from "./ViewDepositsPage";
 import CreditsPage from "./CreditsPage";
 import TransferPage from "./TransferPage";
 import NewJoining from "./NewJoining";
+import ReferralBenefits from "./ReferralBenefits";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path="/admin/login" element={<Login isAdmin={true} />}/>
         <Route path="/register" element={<Register />}/>
         <Route path="/credits" element={<CreditsPage />}/>
+        <Route path="/referral-benefit" element={<ReferralBenefits />}/>
         <Route path="/withdrawals" element={<CreditsPage from="withdrawals" />}/>
         <Route path="/transfer" element={<TransferPage />}/>
         <Route path="/Dashboard" element={<Dashboard />}/>

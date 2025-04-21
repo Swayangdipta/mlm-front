@@ -410,9 +410,25 @@ export const getCreditsForUser = async (data) => {
   }
 }
 
+export const getReferralBenefits = async (data) => {
+  try {
+      return axios.get(`${backend}/users/referral-benefits/${data}`).then(response => response)
+  } catch (error) {
+      return error
+  }
+}
+
 export const getWithdrawalsForUser = async (data) => {
   try {
       return axios.get(`${backend}/users/withdrawals/${data}`).then(response => response)
+  } catch (error) {
+      return error
+  }
+}
+
+export const getMyPendingDeposits = async (data) => {
+  try {    
+      return axios.get(`${backend}/api/deposit/my-pending-deposits/${data}`).then(response => response)
   } catch (error) {
       return error
   }
