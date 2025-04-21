@@ -16,6 +16,7 @@ import Menu from "./Menu";
 import bg from './asset/background.jpg'
 import { getUserData, getUserDownline } from "./helper/baseApiCalls";
 import { toast } from "react-toastify";
+import { IoCopy } from "react-icons/io5";
 function Dashboard() {
   const [currentUser, setCuerrentUser] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -165,11 +166,11 @@ function Dashboard() {
         <div className="p-4 rounded-lg w-full md:w-[calc(100%-2rem)] mx-auto">
 
           {/* boxes */}
-          <div className="relative w-full flex items-center mt-2 justify-between bg-white rounded-lg p-2">
+          <div className="relative w-full flex items-center mt-2 justify-between bg-green-300 rounded-lg p-2">
             {/* Input Box */}
             <input
               id="referral-input"
-              className="border border-gray-300 px-2 py-1 w-full rounded-lg h-14 text-gray-600 pr-12 text-sm md:text-base"
+              className="border border-gray-300 bg-green-500 px-2 py-1 w-full rounded-lg h-14 text-white pr-12 text-sm md:text-base"
               value={`${
                 import.meta.env.VITE_FRONTEND_URL
               }/ih/register/${currentUser?.code}`}
@@ -178,20 +179,20 @@ function Dashboard() {
             {/* Icon Container */}
             <div className="absolute flex items-center justify-center right-4 sm:space-x-4">
               {/* Copy Icon */}
-              <FaRegCopy
-                className="text-gray-600 text-lg cursor-pointer"
+              <IoCopy
+                className="text-white cursor-pointer text-[24px]"
                 onClick={handleCopy}
               />
               {/* WhatsApp Icon */}
               <a
-                className="bg-white text-lg"
+                className="text-lg"
                 href={`https://wa.me/?text=Check%20out%20this%20referral%20link:%20${encodeURIComponent(`${
                 import.meta.env.VITE_FRONTEND_URL
               }/ih/register/${currentUser?.code}`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <FaSquareWhatsapp className="text-gray-600 text-xl cursor-pointer" />
+                <FaSquareWhatsapp className="text-white text-[26px] cursor-pointer" />
               </a>
             </div>
           </div>
