@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import { getCreditsForUser, getReferralBenefits, getWithdrawalsForUser } from './helper/baseApiCalls';
 import { getAuthFromSessionStorage } from './utils/ls.util';
+import { toast } from 'react-toastify';
 
 const ReferralBenefits = ({from = 'credits'}) => {
     const [withdrawals, setWithdrawals] = useState([]);
