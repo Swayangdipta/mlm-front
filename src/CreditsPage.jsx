@@ -16,6 +16,8 @@ const CreditsPage = ({from = 'credits'}) => {
                 if (response.message) {
                     return toast.error(response.message);
                 }
+                console.log(response);
+                
                 setWithdrawals(response.data);
             }
         } catch (error) {
@@ -77,6 +79,7 @@ const CreditsPage = ({from = 'credits'}) => {
                         <th className="p-4 border">Date</th>
                         <th className="p-4 border">Time</th>
                         <th className="p-4 border">Source</th>
+                        <th className="p-4 border">From</th>
                         <th className="p-4 border">Tokens</th>
                     </tr>
                     </thead>
@@ -89,8 +92,8 @@ const CreditsPage = ({from = 'credits'}) => {
                                         <td className="p-1 border">{index + 1}</td>
                                         <td className="p-1 border">{withdrawal.date}</td>
                                         <td className="p-1 border">{withdrawal.time}</td>
-                                        <td className={`p-1 border text-bold ${from === 'credits' ? 'text-green-500' : 'text-rose-500'}`}>{withdrawal.purpose}</td>
-                                        <td className="p-1 border">{withdrawal.amount}</td>
+                                        <td className={`p-1 border text-bold ${from === 'credits' ? 'text-green-500' : 'text-rose-500'}`}>{withdrawal.purpose + (withdrawal.purpose.includes('Team') ? ' Level - ' + withdrawal.level : '')}</td>
+                                        <td className="p-1 border">{withdrawal.amount.$numberDecimal || withdrawal.amount.toFixed(3)}</td>
                                     </tr>
                                 ))
                             ) : (
