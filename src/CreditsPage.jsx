@@ -79,7 +79,7 @@ const CreditsPage = ({from = 'credits'}) => {
                         <th className="p-4 border">Date</th>
                         <th className="p-4 border">Time</th>
                         <th className="p-4 border">Source</th>
-                        <th className="p-4 border">From</th>
+                        {/* <th className="p-4 border">From</th> */}
                         <th className="p-4 border">Tokens</th>
                     </tr>
                     </thead>
