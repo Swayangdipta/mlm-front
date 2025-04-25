@@ -314,7 +314,7 @@ export const updateUser = async (userId, data) => {
 
 export const transferAmount = async (userId,memberId, data) => {
   try {
-      return axios.put(`${backend}/users/transfer/${userId}/${memberId}`, data).then(response => response)
+      return axios.put(`${backend}/users/transfer/${userId}/${memberId}`, {amount: data}).then(response => response)
   } catch (error) {
       return error
   }

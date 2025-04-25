@@ -28,7 +28,7 @@ const CreditsPage = ({from = 'credits'}) => {
 
     useEffect(() => {
         fetchWithdrawals();
-    }, []);
+    }, [from]);
 
     // handle pagination
     // const indexOfLastWithdrawal = currentPage * withdrawalsPerPage;
@@ -93,7 +93,7 @@ const CreditsPage = ({from = 'credits'}) => {
                                         <td className="p-1 border">{withdrawal.date}</td>
                                         <td className="p-1 border">{withdrawal.time}</td>
                                         <td className={`p-1 border text-bold ${from === 'credits' ? 'text-green-500' : 'text-rose-500'}`}>{withdrawal.purpose + (withdrawal.purpose.includes('Team') ? ' Level - ' + withdrawal.level : '')}</td>
-                                        <td className="p-1 border">{withdrawal.amount.$numberDecimal || withdrawal.amount.toFixed(3)}</td>
+                                        <td className="p-1 border">{from === 'credits' ? (parseFloat(withdrawal.amount.$numberDecimal) || parseFloat(withdrawal.amount).toFixed(3)) : withdrawal.amount}</td>
                                     </tr>
                                 ))
                             ) : (

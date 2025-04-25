@@ -56,6 +56,8 @@ function Dashboard() {
   useEffect(()=>{
     const fetchUser = async () => {
       const res = await getUserData(auth.user.id)
+
+      console.log(res);
       
       if(res.status !== 200){
         toast.error(res.message || res.data.message)
@@ -328,7 +330,9 @@ function Dashboard() {
                 <h3 className="text-lg font-semibold text-gray-100">
                   Total Withdrawl
                 </h3>
-                <p className="text-2xl font-bold text-gray-100">00.00</p>
+                <p className="text-2xl font-bold text-gray-100">
+                  {parseFloat(userData?.withdrawals.reduce((acc, curr) => acc + parseFloat(curr.amount), 0)).toFixed(2)}
+                </p>
               </div>
               </Link>
 
