@@ -259,7 +259,7 @@ function Dashboard() {
                   <h3 className="text-lg font-semibold text-gray-100">
                     Redeem Wallet
                   </h3>
-                  <p className="text-2xl font-bold text-gray-100">{auth.user.redeem_wallet ? auth.user.redeem_wallet : 0}</p>
+                  <p className="text-2xl font-bold text-gray-100">{auth.user.redeem_wallet ? parseFloat(auth.user.redeem_wallet).toFixed(3) : 0}</p>
                 </div>              
               </Link>
 
