@@ -21,6 +21,7 @@ import CreditsPage from "./CreditsPage";
 import TransferPage from "./TransferPage";
 import NewJoining from "./NewJoining";
 import ReferralBenefits from "./ReferralBenefits";
+import TeamBusiness from "./TeamBusiness";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="/profile/bank" element={<BankData />}/>
         <Route path="/downline/:userId" element={<DownlineView />}/>
         <Route path="/downline/direct/:userId" element={<DownlineView type='direct' />}/>
+        <Route path="/team-business/:userId" element={<TeamBusiness />}/>
       </Routes>
       <ToastContainer />
     </Router>

@@ -433,3 +433,11 @@ export const getMyPendingDeposits = async (data) => {
       return error
   }
 }
+
+export const getTotalTeamBusiness = async (data) => {
+  try {
+    return axios.get(`${backend}/users/team-business/${data}`).then(response => response)
+  } catch (error) {
+    return error
+  }
+}

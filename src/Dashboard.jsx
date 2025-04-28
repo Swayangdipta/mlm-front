@@ -14,7 +14,7 @@ import WithdrawalPopup from "./WithdrawalPopup";
 import { MdMenu } from "react-icons/md";
 import Menu from "./Menu";
 import bg from './asset/background.jpg'
-import { getUserData, getUserDownline } from "./helper/baseApiCalls";
+import { getTotalTeamBusiness, getUserData, getUserDownline } from "./helper/baseApiCalls";
 import { toast } from "react-toastify";
 import { IoCopy } from "react-icons/io5";
 function Dashboard() {
@@ -28,6 +28,8 @@ function Dashboard() {
     total: 0,
     referral_wallet: 0
   });
+
+  const [teamBusiness, setTeamBusiness] = useState(0)
   const auth = getAuthFromSessionStorage();
   const navigate = useNavigate();
 
@@ -84,6 +86,19 @@ function Dashboard() {
       fetchUser()
       fetchDownline()
     }
+  },[])
+
+  useEffect(()=>{
+    (async () => {
+      const res = await getTotalTeamBusiness(auth.user.id)
+
+      if(res.status !== 200){
+        toast.error(res.message || res.data.message)
+        return
+      } 
+
+      setTeamBusiness(res.data.totalBusiness)
+    })()
   },[])
 
   useEffect(()=>{
@@ -260,6 +275,15 @@ function Dashboard() {
                     Redeem Wallet
                   </h3>
                   <p className="text-2xl font-bold text-gray-100">{auth.user.redeem_wallet ? parseFloat(auth.user.redeem_wallet).toFixed(3) : 0}</p>
+                </div>              
+              </Link>
+
+              <Link to={`/team-business/${auth.user.id}`}>
+                <div className="bg-gradient-to-br from-sky-400 to-sky-600 shadow-md p-5 rounded-lg text-center">
+                  <h3 className="text-lg font-semibold text-gray-100">
+                    Team Business
+                  </h3>
+                  <p className="text-2xl font-bold text-gray-100">{parseFloat(teamBusiness).toFixed(3)}</p>
                 </div>              
               </Link>
 
