@@ -48,6 +48,12 @@ const DepositPage = () => {
                 setIsLoading(false);
                 return;
             }
+
+            if(response.status === 402){
+                toast.error("Deposit amount need to be at least $100 more than previous deposit amount.");
+                setIsLoading(false);
+                return;
+            }
     
             toast.error(response?.data?.message || response?.response?.data?.message || response?.data?.data?.message || "Failed to submit deposit request.");
             setIsLoading(false);
