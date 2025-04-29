@@ -3,7 +3,7 @@ import Header from './Header'
 import { getCreditsForUser, getWithdrawalsForUser } from './helper/baseApiCalls';
 import { getAuthFromSessionStorage } from './utils/ls.util';
 
-const CreditsPage = ({from = 'credits'}) => {
+const CreditsPage = ({from = 'credits', type='all'}) => {
     const [withdrawals, setWithdrawals] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const withdrawalsPerPage = 15;
@@ -18,7 +18,15 @@ const CreditsPage = ({from = 'credits'}) => {
                 }
                 console.log(response);
                 
-                setWithdrawals(response.data);
+                if(type === 'all'){
+                    setWithdrawals(response.data);
+                }else if(type === 'daily'){
+                    const dailyWithdrawals = response.data.filter((withdrawal) => withdrawal.purpose.includes('Daily'));
+                    setWithdrawals(dailyWithdrawals);
+                }else if(type === 'team'){
+                    const teamWithdrawals = response.data.filter((withdrawal) => withdrawal.purpose.includes('Team'));
+                    setWithdrawals(teamWithdrawals);
+                }
             }
         } catch (error) {
             console.log(error);

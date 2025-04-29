@@ -33,6 +33,8 @@ function App() {
         <Route path="/admin/login" element={<Login isAdmin={true} />}/>
         <Route path="/register" element={<Register />}/>
         <Route path="/credits" element={<CreditsPage />}/>
+        <Route path="/credits/daily" element={<CreditsPage type="daily" />}/>
+        <Route path="/credits/team" element={<CreditsPage type="team" />}/>
         <Route path="/referral-benefit" element={<ReferralBenefits />}/>
         <Route path="/withdrawals" element={<CreditsPage from="withdrawals" />}/>
         <Route path="/transfer" element={<TransferPage />}/>

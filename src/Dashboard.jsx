@@ -328,7 +328,7 @@ function Dashboard() {
                 </div>
               </Link>
 
-              <Link to='/credits'>
+              <Link to='/credits/team'>
               <div className="bg-gradient-to-tl from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
                 <h3 className="text-lg font-semibold text-gray-100">
                   Team Benefit
@@ -336,7 +336,7 @@ function Dashboard() {
                 <p className="text-2xl font-bold text-gray-100">{userData?.team_rewards.toFixed(2)}</p>
               </div>
               </Link>
-              <Link to='/credits'>
+              <Link to='/credits/daily'>
                 <div className="bg-gradient-to-br from-green-400 to-green-600 shadow-md p-5 rounded-lg text-center">
                   <h3 className="text-lg font-semibold text-gray-100">
                     Daily Reward
