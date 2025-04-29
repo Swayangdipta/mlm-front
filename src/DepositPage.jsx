@@ -49,7 +49,7 @@ const DepositPage = () => {
                 return;
             }
     
-            toast("An error occurred. Please try again later.");
+            toast(response.data.message || "Failed to submit deposit request.");
             setIsLoading(false);
         } catch (error) {
             toast("An error occurred. Please try again later.");
