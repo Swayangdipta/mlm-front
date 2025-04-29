@@ -48,9 +48,8 @@ const DepositPage = () => {
                 setIsLoading(false);
                 return;
             }
-            console.log(response);
     
-            toast.error(response.data.message || response.data.data.message || "Failed to submit deposit request.");
+            toast.error(response.data.message || response.response.data.message || response.data.data.message || "Failed to submit deposit request.");
             setIsLoading(false);
         } catch (error) {
             toast("An error occurred. Please try again later.");
@@ -76,7 +75,6 @@ const DepositPage = () => {
 
         (async () => { 
             const response = await getMyPendingDeposits(auth.user.id)
-            console.log(response);
             
             if(response.status === 200){
                 setPendingDeposits(response.data)
