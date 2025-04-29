@@ -52,7 +52,7 @@ const DepositPage = () => {
             toast.error(response.data.message || response.response.data.message || response.data.data.message || "Failed to submit deposit request.");
             setIsLoading(false);
         } catch (error) {
-            toast("An error occurred. Please try again later.");
+            toast(error.data.message || error.response.data.message || error.data.data.message ||"An error occurred. Please try again later.");
             setIsLoading(false);
         }
     }
