@@ -58,8 +58,6 @@ function Dashboard() {
   useEffect(()=>{
     const fetchUser = async () => {
       const res = await getUserData(auth.user.id)
-
-      console.log(res);
       
       if(res.status !== 200){
         toast.error(res.message || res.data.message)
@@ -223,14 +221,17 @@ function Dashboard() {
               <CgProfile className="text-3xl ml-4" />
               <div className="flex-col">
                 <p className="font-bold text-white">USER ID</p>
-                <p className="text-white">{currentUser?.rank + "-" + currentUser?.code}</p>
+                <p className="text-white">{currentUser?.code}</p>
               </div>
             </div>
             <div className="flex justify-between mt-4">
               <h3 className="text-lg font-semibold text-white ml-4">
                 {currentUser?.fullname || currentUser?.username}
               </h3>
-              <p className="text-gray-100 mr-8">{currentUser?.country || 'India'}</p>
+              <p className="text-gray-100 flex flex-col items-end">{currentUser?.country || 'India'}
+
+                <p className={`px-4 py-2 rounded mt-4 text-white font-bold ${currentUser?.status === 'active' ? 'bg-green-600' : 'bg-red-700'} `} >{currentUser?.status.toUpperCase()}</p>
+              </p>
             </div>
           </div>
           {/* user section ends */}

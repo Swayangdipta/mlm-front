@@ -97,6 +97,7 @@ const WithdrawalTable = () => {
               <th className="border p-2">Email</th>
               <th className="border p-2">Amount</th>
               <th className="border p-2">Requested At</th>
+              <th className="border p-2">Transferred To</th>
               <th className="border p-2">Status</th>
               <th className="border p-2">Action</th>
             </tr>
@@ -109,6 +110,7 @@ const WithdrawalTable = () => {
                   <td className="border p-2">{withdrawal.user.code}</td>
                   <td className="border p-2">{withdrawal.user.email}</td>
                   <td className="border p-2">${withdrawal.amount}</td>
+                  <td className="border p-2">${withdrawal.toUserCode ? withdrawal.toUserCode +'-'+withdrawal.toUserName : '-' }</td>
                   <td className="border p-2">{new Date(withdrawal.requestedAt).toLocaleString()}</td>
                   <td className="border p-2">{withdrawal.status}</td>
                   <td className="border p-2">

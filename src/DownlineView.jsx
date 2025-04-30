@@ -97,8 +97,9 @@ const DownlineView = ({type = 'all'}) => {
                   <th className="border border-zinc-400 text-sm md:text-base">Sponsor ID</th>
                   <th className="border border-zinc-400 text-sm md:text-base">User ID</th>
                   <th className="border border-zinc-400 text-sm md:text-base">Fullname</th>
-                  <th className="border border-zinc-400 text-sm md:text-base">Registration Date</th>
+                  <th className="border border-zinc-400 text-sm md:text-base">Joining Date</th>
                   <th className="border border-zinc-400 text-sm md:text-base">Business</th>
+                  <th className="border border-zinc-400 text-sm md:text-base">Status</th>
                 </tr>
               </thead>
               <tbody className="bg-zinc-200 w-full text-center text-sm md:text-base">
@@ -119,7 +120,10 @@ const DownlineView = ({type = 'all'}) => {
                         {item.createdAt.split("T")[0]}
                       </td>
                       <td className="border border-zinc-400">
-                        {item.totalBusiness || 0}
+                        {item.wallet_balance || 0}
+                      </td>
+                      <td className={`border border-zinc-400 ${item.status === 'active' ? 'text-green-500' : 'text-red-500'}`}>
+                        {item.status === 'active' ? 'Active' : 'Inactive'}
                       </td>
                     </tr>
                   ))

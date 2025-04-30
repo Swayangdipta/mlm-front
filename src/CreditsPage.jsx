@@ -88,6 +88,7 @@ const CreditsPage = ({from = 'credits', type='all'}) => {
                         <th className="p-4 border">Time</th>
                         <th className="p-4 border">Source</th>
                         {/* <th className="p-4 border">From</th> */}
+                        {from !== 'credits' && (<th className="p-4 border">Transferred To</th>)}
                         <th className="p-4 border">Tokens</th>
                     </tr>
                     </thead>
@@ -101,6 +102,7 @@ const CreditsPage = ({from = 'credits', type='all'}) => {
                                         <td className="p-1 border">{withdrawal.date}</td>
                                         <td className="p-1 border">{withdrawal.time}</td>
                                         <td className={`p-1 border text-bold ${from === 'credits' ? 'text-green-500' : 'text-rose-500'}`}>{withdrawal.purpose + (withdrawal.purpose.includes('Team') ? ' Level - ' + withdrawal.level : '')}</td>
+                                        {from !== 'credits' && (<td className="p-1 border">{withdrawal.toUserCode ? withdrawal.toUserCode+'-'+withdrawal.toUserName : '--'}</td>)}
                                         <td className="p-1 border">{from === 'credits' ? (parseFloat(withdrawal.amount.$numberDecimal) || parseFloat(withdrawal.amount).toFixed(3)) : withdrawal.amount}</td>
                                     </tr>
                                 ))
