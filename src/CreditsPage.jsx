@@ -107,7 +107,14 @@ const CreditsPage = ({from = 'credits', type='all'}) => {
                                             {
                                                 from !== 'credits' && (
                                                     <span>
-                                                        ${withdrawal.amount / 400}
+                                                        ( = ${withdrawal.amount / 400} )
+                                                    </span>
+                                                )
+                                            }
+                                            {
+                                                from === 'credits' && withdrawal.purpose.includes('Transfer') && (
+                                                    <span>
+                                                        ( = ${(parseFloat(withdrawal.amount.$numberDecimal) || parseFloat(withdrawal.amount).toFixed(3)) / 400} )
                                                     </span>
                                                 )
                                             }
