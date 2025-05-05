@@ -7,6 +7,7 @@ import { getAuthFromSessionStorage, setAuthInSessionStorage } from './utils/ls.u
 const TransferPage = () => {
     const [isAllowed,setIsAllowed] = React.useState(false)
     const [amount, setAmount] = React.useState(0)
+    const [amountInDollar, setAmountInDollar] = React.useState(0)
     const [userId, setUserId] = React.useState('')
     const [userFullname, setUserFullname] = React.useState(undefined)
     useEffect(() => {
@@ -47,6 +48,10 @@ const TransferPage = () => {
             })()
         }
     },[userId])
+
+    useEffect(()=>{
+        setAmountInDollar(amount / 400)
+    },[amount])
 
     const handleTransfer = async e => {
         e.preventDefault()
@@ -90,6 +95,7 @@ const TransferPage = () => {
                         <input name='userId' value={userId} onChange={handleChange} type="text" placeholder="Enter UserID" className="border p-2 rounded" />
                         <p className='w-full h-[20px] px-2 flex items-center'>{userFullname && userFullname.fullname}</p>
                         <input name='amount' value={amount} onChange={handleChange} type="number" placeholder="Enter Amount" className="border p-2 rounded" />
+                        <p>Equivalent Dollar: ${amountInDollar}</p>
                         <button type="submit" className="bg-blue-500 text-white p-2 rounded">Transfer</button>
                     </div>
                 </form>
