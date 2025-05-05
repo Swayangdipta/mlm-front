@@ -106,6 +106,7 @@ const Invest = ({type = 'def'}) => {
             <div className='w-[300px] min-h-[150px] h-max mx-auto rounded border-amber-500 border bg-[#00000080] shadow-inner flex  flex-col items-left justify-center gap-30 p-[20px]'>
                 <h1 className='text-white text-[20px]'>{type !== 'def' && type} Tokens ( AIDAM )</h1>
                 <h2 className='text-white text-[24px]'>{currentBalance} <span className='text-[18px]'>tokens</span></h2>
+                <h2 className='text-white text-[20px]'>Equivalent Dollar: ${currentBalance / 400}</h2>
             </div>
       </main>
     </div>

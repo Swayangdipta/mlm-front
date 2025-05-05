@@ -103,7 +103,15 @@ const CreditsPage = ({from = 'credits', type='all'}) => {
                                         <td className="p-1 border">{withdrawal.time}</td>
                                         <td className={`p-1 border text-bold ${from === 'credits' ? 'text-green-500' : 'text-rose-500'}`}>{withdrawal.purpose + (withdrawal.purpose.includes('Team') ? ' Level - ' + withdrawal.level : '')}</td>
                                         {from !== 'credits' && (<td className="p-1 border">{withdrawal.toUserCode ? withdrawal.toUserCode+'-'+withdrawal.toUserName : '--'}</td>)}
-                                        <td className="p-1 border">{from === 'credits' ? (parseFloat(withdrawal.amount.$numberDecimal) || parseFloat(withdrawal.amount).toFixed(3)) : withdrawal.amount}</td>
+                                        <td className="p-1 border flex flex-col">{from === 'credits' ? (parseFloat(withdrawal.amount.$numberDecimal) || parseFloat(withdrawal.amount).toFixed(3)) : withdrawal.amount} 
+                                            {
+                                                from !== 'credits' && (
+                                                    <span>
+                                                        ${withdrawal.amount / 400}
+                                                    </span>
+                                                )
+                                            }
+                                        </td>
                                     </tr>
                                 ))
                             ) : (
