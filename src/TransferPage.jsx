@@ -95,7 +95,7 @@ const TransferPage = () => {
                         <input name='userId' value={userId} onChange={handleChange} type="text" placeholder="Enter UserID" className="border p-2 rounded" />
                         <p className='w-full h-[20px] px-2 flex items-center'>{userFullname && userFullname.fullname}</p>
                         <input name='amount' value={amount} onChange={handleChange} type="number" placeholder="Enter Amount" className="border p-2 rounded" />
-                        <p>Equivalent Dollar: ${amountInDollar}</p>
+                        <p className='w-full h-[20px] px-2 flex items-center'>Equivalent Dollar: ${amountInDollar}</p>
                         <button type="submit" className="bg-blue-500 text-white p-2 rounded">Transfer</button>
                     </div>
                 </form>
