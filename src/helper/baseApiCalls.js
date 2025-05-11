@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { use } from 'react'
 
 const backend = import.meta.env.VITE_BACKEND_URL
 
@@ -437,6 +438,13 @@ export const getMyPendingDeposits = async (data) => {
 export const getTotalTeamBusiness = async (data) => {
   try {
     return axios.get(`${backend}/users/team-business/${data}`).then(response => response)
+  } catch (error) {
+    return error
+  }
+}
+export const activatePack = async (userId, data) => {
+  try {    
+    return axios.put(`${backend}/users/activate/pack/${userId}`, data).then(response => response)
   } catch (error) {
     return error
   }

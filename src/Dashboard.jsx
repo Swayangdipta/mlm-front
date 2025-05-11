@@ -17,11 +17,13 @@ import bg from './asset/background.jpg'
 import { getTotalTeamBusiness, getUserData, getUserDownline } from "./helper/baseApiCalls";
 import { toast } from "react-toastify";
 import { IoCopy } from "react-icons/io5";
+import ActivatePack from "./ActivatePack";
 function Dashboard() {
   const [currentUser, setCuerrentUser] = useState(null);
   const [userData, setUserData] = useState(null);
   const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
   const [isMenuOpen, setIsmenuOpen] = useState(false);
+  const [isActivatePAckOpen, setIsActivatePackOpen] = useState(false);
   const [lengths, setLengths] = useState({
     direct: 0,
     linked: 0,
@@ -233,7 +235,21 @@ function Dashboard() {
                 <p className={`px-4 py-2 rounded mt-4 text-white font-bold ${currentUser?.status === 'active' ? 'bg-green-600' : 'bg-red-700'} `} >{currentUser?.status.toUpperCase()}</p>
               </p>
             </div>
+
+            <div className="w-full self-stretch h-[45px] mt-[40px] flex items-center justify-between rounded">
+              {
+                auth.user.redeem_wallet && parseFloat(auth.user.redeem_wallet).toFixed(3) > 100 * 400 && (
+                  <button onClick={e => setIsActivatePackOpen(true)} className="w-full h-full text-center rounded bg-white shadow-custom shadow-purple-700 hover:shadow-none duration-300 font-semibold group"><span className="animate-pulse group-hover:animate-none">Activate Pack Now.</span></button>
+                )
+              }
+            </div>
           </div>
+
+          {
+            isActivatePAckOpen && (
+              <ActivatePack data={auth.user} setIsActivatePackOpen={setIsActivatePackOpen} />
+            )
+          }
           {/* user section ends */}
 
           {/* Details Section starts */}
